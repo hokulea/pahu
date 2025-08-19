@@ -1,3 +1,5 @@
+import { getProperty, setProperty } from 'dot-prop';
+
 import { isFormFieldElement, makeSignal } from './-utils';
 import { VALIDATION_EVENTS } from './definitions';
 import { createField } from './field';
@@ -232,6 +234,24 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     return this.#invalid.get();
   }
 
+  getInitialFieldData<NAME extends string = FieldNames<DATA> | (string & {})>(
+    name: string
+  ): (NAME extends keyof DATA ? DATA[NAME] : UserValue) | undefined {
+    return getProperty(this.#config.data ?? {}, name);
+  }
+
+  #getFormData = (): Record<string, FormDataEntryValue> => {
+    const data = new FormData(this.#element);
+
+    return Object.fromEntries(data.entries()) as Record<string, FormDataEntryValue>;
+  };
+
+  #getFieldData = () => {
+    return Object.fromEntries(this.#fields.values().map((f) => [f.name, f.value]));
+  };
+
+  // #region Elements
+
   registerElement(element: HTMLFormElement): void {
     if (this.#element) {
       this.#unregisterEventListeners(this.#element);
@@ -246,7 +266,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     element.addEventListener('submit', this.handleSubmit, false);
 
-    for (const event of VALIDATION_EVENTS) {
+    for (const event of VALIDATION_EVENTS.filter((e) => e !== 'submit')) {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       element.addEventListener(event, this.handleValidation, false);
     }
@@ -256,23 +276,13 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     element.removeEventListener('submit', this.handleSubmit, false);
 
-    for (const event of VALIDATION_EVENTS) {
+    for (const event of VALIDATION_EVENTS.filter((e) => e !== 'submit')) {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       element.removeEventListener(event, this.handleValidation, false);
     }
   }
 
-  #getFormData = (): Record<string, FormDataEntryValue> => {
-    const data = new FormData(this.#element);
-
-    return Object.fromEntries(data.entries()) as Record<string, FormDataEntryValue>;
-  };
-
-  #getFieldData = () => {
-    return Object.fromEntries(this.#fields.values().map((f) => [f.name, f.value]));
-  };
-
-  // #region Submissen
+  // #region Submission
 
   submit = async (): Promise<void> => {
     await this.handleSubmit();
@@ -284,8 +294,14 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     const validationResult = await this.validate();
 
     if (validationResult.success) {
+      const data = {};
+
+      for (const [key, value] of Object.entries(validationResult.value)) {
+        setProperty(data, key, value);
+      }
+
       this.#invalid.set(false);
-      this.#config.submit?.(validationResult.value);
+      this.#config.submit?.(data);
     } else {
       this.#invalid.set(true);
       this.#config.validated?.('submit', validationResult);
@@ -383,7 +399,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     }
   };
 
-  validate = async (): Promise<ValidationResult> => {
+  validate = async (): Promise<ValidationResult<Record<string, unknown>>> => {
     const issues: Issue[] = [];
 
     issues.push(...this.#validateNativeOnUnregisteredFields());

@@ -223,8 +223,10 @@ export class Field<
       ...conf
     } as FieldConfig<DATA, NAME, VALUE>;
 
-    if ('value' in config) {
-      this.#value.set(config.value as FieldValue<DATA, NAME, VALUE>);
+    const value = 'value' in config ? config.value : this.#form.getInitialFieldData(config.name);
+
+    if (value) {
+      this.#value.set(value as FieldValue<DATA, NAME, VALUE>);
     }
 
     if (element) {

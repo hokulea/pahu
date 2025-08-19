@@ -33,7 +33,8 @@
     "test:ui": "vitest --browser.provider=preview --no-browser.headless --browser.name=firefox"
   },
   "dependencies": {
-    "@standard-schema/spec": "^1.0.0"
+    "@standard-schema/spec": "^1.0.0",
+    "dot-prop": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",

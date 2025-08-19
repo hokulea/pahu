@@ -1,5 +1,5 @@
 import { page } from '@vitest/browser/context';
-import { expect, test, vi } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import { createForm } from '#src';
 
@@ -47,4 +47,73 @@ test('re-registerElement()', async () => {
   element.dispatchEvent(new SubmitEvent('submit'));
 
   await vi.waitFor(() => expect(submitHandler).not.toHaveBeenCalled());
+});
+
+describe('Submission', () => {
+  test('native form (invalid)', async () => {
+    const screen = page.render(`
+      <form novalidate data-testid="form">
+        <input type="email" name="email">
+        <input type="number" name="age" required>
+      </form>
+    `);
+
+    const formElement = screen.getByTestId('form').element() as HTMLFormElement;
+    const validationHandler = vi.fn();
+
+    createForm({
+      element: formElement,
+      validated: validationHandler
+    });
+
+    formElement.dispatchEvent(new SubmitEvent('submit'));
+
+    await vi.waitFor(() => {
+      expect(validationHandler).toBeCalledTimes(1);
+    });
+  });
+
+  test('native form (valid)', async () => {
+    const screen = page.render(`
+      <form novalidate data-testid="form">
+        <input type="email" name="email">
+        <input type="number" name="age">
+      </form>
+    `);
+
+    const formElement = screen.getByTestId('form').element() as HTMLFormElement;
+    const submitHandler = vi.fn();
+
+    createForm({
+      element: formElement,
+      submit: submitHandler
+    });
+
+    formElement.dispatchEvent(new SubmitEvent('submit'));
+
+    await vi.waitFor(() => {
+      expect(submitHandler).toBeCalledTimes(1);
+    });
+  });
+
+  test('nested data', async () => {
+    const formData = {
+      email: 'hello@there',
+      profile: {
+        name: 'Obi Wan Kenobi',
+        age: 18
+      }
+    };
+
+    const submitHandler = vi.fn();
+    const form = createForm({ data: formData, submit: submitHandler });
+
+    form.createField({ name: 'email' });
+    form.createField({ name: 'profile.name' });
+    form.createField({ name: 'profile.age' });
+
+    await form.submit();
+
+    expect(submitHandler).toBeCalledWith(formData);
+  });
 });

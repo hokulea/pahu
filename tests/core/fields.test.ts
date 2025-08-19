@@ -106,6 +106,30 @@ test('register multiple elements', async () => {
   await vi.waitUntil(() => expect(validationHandler).toBeCalled());
 });
 
+test('Initial Data', () => {
+  const formData = {
+    email: 'hello@there',
+    profile: {
+      name: 'Obi Wan Kenobi',
+      age: 18
+    }
+  };
+
+  const form = createForm({ data: formData });
+  const email = form.createField({
+    name: 'email',
+    value: 'hello@general.kenobi'
+  });
+  const name = form.createField({ name: 'profile.name' });
+  const age = form.createField({ name: 'profile.age' });
+  const planet = form.createField({ name: 'planet' });
+
+  expect(email.value).toBe('hello@general.kenobi');
+  expect(name.value).toBe('Obi Wan Kenobi');
+  expect(age.value).toBe(18);
+  expect(planet.value).toBeUndefined();
+});
+
 describe('Linked fields', () => {
   test('validation triggers', async () => {
     const form = createForm();
