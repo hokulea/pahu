@@ -1,0 +1,52 @@
+# This workflow is largely based on
+# https://github.com/salsify/ember-css-modules/blob/master/.github/workflows/ci.yml
+
+name: CI
+
+# These trigger patterns courtesy of https://github.com/broccolijs/broccoli/pull/436
+on:
+  pull_request:
+  push:
+    # filtering branches here prevents duplicate builds from pull_request and push
+    branches:
+      - main
+      - "v*"
+
+jobs:
+  lint-js:
+    name: lint:js
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm lint:js
+
+  lint-types:
+    name: lint:types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm lint:types
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test
+        run: pnpm test
+
+  test-ember:
+    name: Test (Ember)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test
+        run: pnpm test:ember
