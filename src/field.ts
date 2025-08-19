@@ -31,7 +31,7 @@ export type FieldValue<DATA, NAME, VALUE> = NAME extends keyof DATA ? DATA[NAME]
  * Callback used for field level validation
  */
 export type FieldValidationHandler<
-  DATA extends UserData,
+  DATA extends UserData = UserData,
   NAME extends string = FieldNames<DATA> | (string & {}),
   VALUE = NAME extends keyof DATA ? DATA[NAME] : UserValue
 > = (data: {

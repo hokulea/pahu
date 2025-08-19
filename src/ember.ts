@@ -10,6 +10,17 @@ import type { FormAPI as UpstreamFormAPI, FormConfig } from './form';
 import type { AttrValue } from '@glint/template';
 import type { FunctionBasedModifier } from 'ember-modifier';
 
+export type {
+  FieldNames,
+  Issue,
+  UserData,
+  ValidatedHandler,
+  ValidationMode,
+  ValidationResult
+} from './definitions';
+export type { FieldConfig, FieldValidationHandler, FieldValue } from './field';
+export type { FormConfig, FormValidateHandler, SubmitHandler } from './form';
+
 interface RegisterFormSignature {
   Element: HTMLFormElement;
   Args: {

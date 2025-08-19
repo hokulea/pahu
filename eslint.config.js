@@ -1,3 +1,3 @@
-import node from '@gossi/config-eslint/node';
+import ember from '@gossi/config-eslint/ember';
 
-export default node(import.meta.dirname);
+export default ember(import.meta.dirname);

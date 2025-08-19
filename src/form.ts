@@ -30,6 +30,10 @@ import type { StandardSchemaV1 } from '@standard-schema/spec';
 
 export type FormOutput<DATA extends UserData> = Record<string, FormDataEntryValue> & DATA;
 
+export type SubmitHandler<DATA extends Record<string, unknown> = Record<string, unknown>> = (
+  data: DATA
+) => void;
+
 /**
  * Callback used for field level validation
  */
@@ -77,7 +81,7 @@ export interface FormConfig<DATA extends UserData> {
   /**
    * Called when the user has submitted the form and no validation errors have been determined.
    */
-  submit?: (data: unknown) => void;
+  submit?: SubmitHandler;
 
   /**
    * Called when the form is validated.
