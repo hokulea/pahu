@@ -1,10 +1,9 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: ['src/index.ts', 'src/ember.ts'],
   splitting: false,
   sourcemap: true,
   clean: true,
-  format: ['cjs', 'esm'],
   dts: true
 });
