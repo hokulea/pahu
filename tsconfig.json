@@ -31,11 +31,15 @@
     //   "DOM"
     // ]
     "types": [
+      "ember-source/types",
       "@vitest/browser/matchers",
       "@vitest/browser/providers/playwright",
       "vitest-browser-html"
     ],
     "paths": {
+      "#ember": [
+        "./src/emmber.ts"
+      ],
       "#src": [
         "./src/index.ts"
       ],

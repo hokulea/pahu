@@ -22,11 +22,9 @@ export default defineConfig({
       provider: 'playwright',
       testerHtmlPath: 'index.html',
       instances: [
-        {
-          browser: 'firefox'
-        }
-        // { browser: 'chromium' }
-        // { browser: 'webkit' }
+        // { browser: 'firefox' }
+        { browser: 'chromium' },
+        { browser: 'webkit' }
       ]
     }
   }

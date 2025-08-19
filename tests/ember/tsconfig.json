@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "../../tsconfig.json",
+    "@ember/app-tsconfig",
+  ],
+  "glint": {
+    "environment": [
+      "ember-loose",
+      "ember-template-imports"
+    ]
+  },
+  "include": [
+    "."
+  ],
+  "compilerOptions": {
+    "rootDir": "../../",
+    "types": [
+      "ember-source/types",
+      "vite/client",
+      "qunit-dom"
+    ]
+  }
+}

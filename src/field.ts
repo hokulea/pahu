@@ -31,7 +31,7 @@ export type FieldValue<DATA, NAME, VALUE> = NAME extends keyof DATA ? DATA[NAME]
  * Callback used for field level validation
  */
 export type FieldValidationHandler<
-  DATA extends UserData,
+  DATA extends UserData = UserData,
   NAME extends string = FieldNames<DATA> | (string & {}),
   VALUE = NAME extends keyof DATA ? DATA[NAME] : UserValue
 > = (data: {
@@ -50,7 +50,7 @@ type FieldValidator<DATA extends UserData, NAME extends string, VALUE> =
 /**
  * Configuration for a Field
  */
-export type FieldConfig<DATA extends UserData, NAME extends string, VALUE> = {
+export interface FieldConfig<DATA extends UserData, NAME extends string, VALUE> {
   /**
    * Register a field element
    */
@@ -103,7 +103,8 @@ export type FieldConfig<DATA extends UserData, NAME extends string, VALUE> = {
 
   // not happy about this, but here we are (see next comment)
   value?: FieldValue<DATA, NAME, VALUE>;
-};
+}
+
 // It would be much preferable to use the following intersection, which only
 // asks for the `value` property, when not being able to take it from DATA. That
 // would strengthen the types and throw a proper error.
@@ -113,13 +114,10 @@ export type FieldConfig<DATA extends UserData, NAME extends string, VALUE> = {
 //  & (NAME extends keyof DATA ? {} : { value?: FieldValue<DATA, NAME, VALUE> });
 
 /* Internal full config with the reference to the form */
-type FullFieldConfig<DATA extends UserData, NAME extends string, VALUE> = FieldConfig<
-  DATA,
-  NAME,
-  VALUE
-> & {
+interface FullFieldConfig<DATA extends UserData, NAME extends string, VALUE>
+  extends FieldConfig<DATA, NAME, VALUE> {
   form: Form<DATA>;
-};
+}
 
 // #region API
 
@@ -169,11 +167,18 @@ export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE> {
   /** For advanced usage, mostly for framework integration */
   subtle: {
     /**
-     * Register a HTML element with the field
+     * Register a HTML element with this field
      *
      * @param element the HTML element
      */
     registerElement(element: FieldElement): void;
+
+    /**
+     * Unregister a HTML element from this field
+     *
+     * @param element the HTML element
+     */
+    unregisterElement(element: FieldElement): void;
   };
 }
 
@@ -230,7 +235,7 @@ export class Field<
     }
 
     if (element) {
-      this.registerElement(element);
+      this.#registerElement(element);
     }
 
     if (config.linkedField) {
@@ -240,7 +245,11 @@ export class Field<
 
   subtle = {
     registerElement: (element: FieldElement): void => {
-      this.registerElement(element);
+      this.#registerElement(element);
+    },
+
+    unregisterElement: (element: FieldElement): void => {
+      this.#unregisterElement(element);
     }
   };
 
@@ -256,14 +265,14 @@ export class Field<
     }
   }
 
-  registerElement(element: FieldElement): void {
+  #registerElement(element: FieldElement): void {
     if (!this.#elements.has(element)) {
       this.#elements.add(element);
       this.#registerEventListeners(element);
     }
   }
 
-  unregisterElement(element: FieldElement): void {
+  #unregisterElement(element: FieldElement): void {
     if (this.#elements.has(element)) {
       this.#elements.delete(element);
       this.#unregisterEventListeners(element);

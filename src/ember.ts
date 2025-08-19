@@ -1,19 +1,25 @@
 import { modifier } from 'ember-modifier';
 import { cell } from 'ember-resources';
 
-import { createForm as upstreamCreateForm } from '@hokulea/pahu';
+import { createForm as upstreamCreateForm } from './form';
 
+import type { SignalFactory } from './-utils';
+import type { FieldElement, UserData } from './definitions';
+import type { FieldAPI as UpstreamFieldAPI, FieldConfig, FieldValue } from './field';
+import type { FormAPI as UpstreamFormAPI, FormConfig } from './form';
 import type { AttrValue } from '@glint/template';
-import type {
-  FieldAPI as UpstreamFieldAPI,
-  FieldConfig,
-  FieldElement,
-  FormAPI as UpstreamFormAPI,
-  FormConfig,
-  SignalFactory,
-  UserData
-} from '@hokulea/pahu';
 import type { FunctionBasedModifier } from 'ember-modifier';
+
+export type {
+  FieldNames,
+  Issue,
+  UserData,
+  ValidatedHandler,
+  ValidationMode,
+  ValidationResult
+} from './definitions';
+export type { FieldConfig, FieldValidationHandler, FieldValue } from './field';
+export type { FormConfig, FormValidateHandler, SubmitHandler } from './form';
 
 interface RegisterFormSignature {
   Element: HTMLFormElement;
@@ -31,18 +37,19 @@ interface RegisterFieldSignature {
   };
 }
 
-export type FieldAPI<DATA extends UserData, NAME extends string, VALUE> = {
-  value: Exclude<VALUE, 'unknown'>;
-  registerField: FunctionBasedModifier<RegisterFieldSignature>;
-} & UpstreamFieldAPI<DATA, NAME, VALUE>;
+export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE>
+  extends UpstreamFieldAPI<DATA, NAME, VALUE> {
+  value: Exclude<FieldValue<DATA, NAME, VALUE>, 'unknown'>;
+  registerElement: FunctionBasedModifier<RegisterFieldSignature>;
+}
 
-export type FormAPI<DATA extends UserData = UserData> = {
-  registerForm: FunctionBasedModifier<RegisterFormSignature>;
+export interface FormAPI<DATA extends UserData = UserData> extends UpstreamFormAPI<DATA> {
+  registerElement: FunctionBasedModifier<RegisterFormSignature>;
 
   createField<NAME extends string, VALUE = NAME extends keyof DATA ? DATA[NAME] : AttrValue>(
     config: FieldConfig<DATA, NAME, VALUE>
   ): FieldAPI<DATA, NAME, VALUE>;
-} & UpstreamFormAPI<DATA>;
+}
 
 const signalFactory: SignalFactory = <T>(t?: T) => {
   const reactive = cell(t);
@@ -68,7 +75,7 @@ export function createForm<DATA extends UserData = UserData>(
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { createField } = form;
 
-  form.registerForm = modifier<RegisterFormSignature>((element) => {
+  form.registerElement = modifier<RegisterFormSignature>((element) => {
     form.subtle.registerElement(element);
   });
 
@@ -80,8 +87,12 @@ export function createForm<DATA extends UserData = UserData>(
   ): FieldAPI<DATA, NAME, VALUE> => {
     const field = createField(fieldConfig) as unknown as FieldAPI<DATA, NAME, VALUE>;
 
-    field.registerField = modifier<RegisterFieldSignature>((element) => {
+    field.registerElement = modifier<RegisterFieldSignature>((element) => {
       field.subtle.registerElement(element);
+
+      return () => {
+        field.subtle.unregisterElement(element);
+      };
     });
 
     return field;

@@ -6,7 +6,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { getProperty } from 'dot-prop';
 import sinon from 'sinon';
 
-import { createForm } from '#src';
+import { createForm } from '#src/ember';
 
 export function pick<V = unknown>(path: string, action?: (value: V) => void) {
   return function (event: object): V | void {
@@ -30,7 +30,7 @@ module('createForm', (hooks) => {
     await render(
       <template>
         {{#let (createForm submit=submitHandler) as |f|}}
-          <form novalidate {{f.registerForm}}>
+          <form novalidate {{f.registerElement}}>
             <input type="text" name="givenName" value="Luke" />
             <input type="text" name="familyName" value="Skywalker" />
             <input type="number" name="age" value="19" />
@@ -51,11 +51,11 @@ module('createForm', (hooks) => {
       await render(
         <template>
           {{#let (createForm) as |f|}}
-            <form novalidate {{f.registerForm}}>
+            <form novalidate {{f.registerElement}}>
               {{#let (f.createField name="givenName") as |fd|}}
                 <input
                   type="text"
-                  {{fd.registerField}}
+                  {{fd.registerElement}}
                   name={{fd.name}}
                   {{on "change" (pick "target.value" fd.setValue)}}
                 />
@@ -79,11 +79,11 @@ module('createForm', (hooks) => {
       await render(
         <template>
           {{#let (createForm) as |f|}}
-            <form novalidate {{f.registerForm}}>
+            <form novalidate {{f.registerElement}}>
               {{#let (f.createField name="givenName") as |fd|}}
                 <input
                   type="text"
-                  {{fd.registerField}}
+                  {{fd.registerElement}}
                   name={{fd.name}}
                   {{on "change" (pick "target.value" fd.setValue)}}
                   required
@@ -115,11 +115,11 @@ module('createForm', (hooks) => {
       await render(
         <template>
           {{#let (createForm) as |f|}}
-            <form novalidate {{f.registerForm}}>
+            <form novalidate {{f.registerElement}}>
               {{#let (f.createField name="givenName") as |fd|}}
                 <input
                   type="text"
-                  {{fd.registerField}}
+                  {{fd.registerElement}}
                   name={{fd.name}}
                   {{on "change" (pick "target.value" fd.setValue)}}
                   required
@@ -143,11 +143,11 @@ module('createForm', (hooks) => {
       await render(
         <template>
           {{#let (createForm) as |f|}}
-            <form novalidate {{f.registerForm}}>
+            <form novalidate {{f.registerElement}}>
               {{#let (f.createField name="givenName") as |fd|}}
                 <input
                   type="text"
-                  {{fd.registerField}}
+                  {{fd.registerElement}}
                   name={{fd.name}}
                   {{on "change" (pick "target.value" fd.setValue)}}
                   data-validated={{fd.validated}}

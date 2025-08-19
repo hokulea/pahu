@@ -30,6 +30,10 @@ import type { StandardSchemaV1 } from '@standard-schema/spec';
 
 export type FormOutput<DATA extends UserData> = Record<string, FormDataEntryValue> & DATA;
 
+export type SubmitHandler<DATA extends Record<string, unknown> = Record<string, unknown>> = (
+  data: DATA
+) => void;
+
 /**
  * Callback used for field level validation
  */
@@ -43,7 +47,7 @@ type FormValidator<DATA extends UserData> = FormValidateHandler<DATA> | Standard
 /**
  * Configuration for a Form
  */
-export type FormConfig<DATA extends UserData> = {
+export interface FormConfig<DATA extends UserData> {
   /**
    * Register the `<form>` element
    */
@@ -77,7 +81,7 @@ export type FormConfig<DATA extends UserData> = {
   /**
    * Called when the user has submitted the form and no validation errors have been determined.
    */
-  submit?: (data: unknown) => void;
+  submit?: SubmitHandler;
 
   /**
    * Called when the form is validated.
@@ -93,7 +97,7 @@ export type FormConfig<DATA extends UserData> = {
   subtle?: {
     signalFactory?: SignalFactory;
   };
-};
+}
 
 const DEFAULT_CONFIG: Partial<FormConfig<UserData>> = {
   validateOn: 'submit',
@@ -128,13 +132,6 @@ export interface FormAPI<DATA extends UserData> {
    * @param config the new config
    */
   updateConfig(config: FormConfig<DATA>): void;
-
-  /**
-   * Registers the form element
-   *
-   * @param element the form element
-   */
-  registerElement(element: HTMLFormElement): void;
 
   /**
    * Create a new field in the form
@@ -202,7 +199,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
 
   subtle = {
     registerElement: (element: HTMLFormElement): void => {
-      this.registerElement(element);
+      this.#registerElement(element);
     }
   };
 
@@ -226,7 +223,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     this.#makeSignal = this.#config.subtle?.signalFactory as SignalFactory;
 
     if (element) {
-      this.registerElement(element);
+      this.#registerElement(element);
     }
   }
 
@@ -252,7 +249,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
 
   // #region Elements
 
-  registerElement(element: HTMLFormElement): void {
+  #registerElement(element: HTMLFormElement): void {
     if (this.#element) {
       this.#unregisterEventListeners(this.#element);
     }

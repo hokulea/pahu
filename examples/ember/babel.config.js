@@ -1,10 +1,6 @@
-import { babelCompatSupport, templateCompatSupport } from '@embroider/compat/babel';
 import { buildMacros } from '@embroider/macros/babel';
 
 const macros = buildMacros();
-
-// For scenario testing
-const compatBuild = Boolean(process.env.ENABLE_COMPAT_BUILD);
 
 export default {
   plugins: [
@@ -19,10 +15,10 @@ export default {
     [
       'babel-plugin-ember-template-compilation',
       {
-        transforms: [...(compatBuild ? templateCompatSupport() : macros.templateMacros)]
+        transforms: [...macros.templateMacros]
       }
     ],
-    ...(compatBuild ? babelCompatSupport() : macros.babelMacros)
+    ...macros.babelMacros
   ],
 
   generatorOpts: {

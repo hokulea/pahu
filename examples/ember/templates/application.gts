@@ -1,24 +1,29 @@
-import { hash } from '@ember/helper';
-import { on } from '@ember/modifier';
-
-import { pick } from '#app/-utils.ts';
-import { createForm } from '#src';
-
-const handleSubmit = (data: unknown) => {
-  console.log('submit', data);
-};
+import { LinkTo } from '@ember/routing';
 
 <template>
-  <h1>Form</h1>
+  <nav>
+    <LinkTo @route="application">Home</LinkTo>
+    |
+    <LinkTo @route="native-form">Native Form</LinkTo>
+    |
+    <LinkTo @route="basic-fields">Basic Fields</LinkTo>
+    |
+    <LinkTo @route="profile-form">Profile Form</LinkTo>
+    |
+    <LinkTo @route="registration-form">Registration Form</LinkTo>
+  </nav>
+
+  {{outlet}}
+  {{!-- <h1>Form</h1>
 
   {{#let (createForm data=(hash givenName="") submit=handleSubmit) as |frm|}}
-    <form {{frm.registerForm}} novalidate>
+    <form {{frm.registerElement}} novalidate>
 
       {{#let (frm.createField name="givenName") as |f|}}
         <p>
           <label>
             Given Name
-            <input {{f.registerField}} name={{f.name}} value={{f.value}} />
+            <input {{f.registerElement}} name={{f.name}} value={{f.value}} />
           </label>
         </p>
       {{/let}}
@@ -28,7 +33,7 @@ const handleSubmit = (data: unknown) => {
           <label>
             Family Name
             <input
-              {{f.registerField}}
+              {{f.registerElement}}
               name={{f.name}}
               value={{f.value}}
               {{on "change" (pick "target.value" f.setValue)}}
@@ -51,5 +56,5 @@ const handleSubmit = (data: unknown) => {
       </p>
 
     </form>
-  {{/let}}
+  {{/let}} --}}
 </template>

@@ -1,0 +1,8 @@
+:root {
+  color-scheme: dark light;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
