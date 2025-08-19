@@ -1,3 +1,8 @@
 import ember from '@gossi/config-eslint/ember';
 
-export default ember(import.meta.dirname);
+export default [
+  {
+    ignores: ['**/dist/']
+  },
+  ...ember(import.meta.dirname)
+];

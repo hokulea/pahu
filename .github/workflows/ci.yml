@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "v*"
+
+jobs:
+  lint-js:
+    name: lint:js
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm lint:js
+
+  lint-types:
+    name: lint:types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - run: pnpm lint:types
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Install Playwright Browsers
+        uses: ./.github/actions/playwright-browser-install
+      - name: Test
+        run: pnpm test
+      - uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{secrets.QLTY_COVERAGE_TOKEN}}
+          files: coverage/lcov.info
+
+  test-ember:
+    name: Test (Ember)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup
+        uses: ./.github/actions/setup
+      - name: Test
+        run: pnpm test:ember
