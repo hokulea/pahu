@@ -30,7 +30,8 @@
     "lint:types": "tsc --noEmit",
     "start": "tsdown --watch",
     "test": "vitest run",
-    "test:ui": "vitest --browser.provider=preview --no-browser.headless --browser.name=firefox"
+    "test:ui": "vitest --browser.provider=preview --no-browser.headless --browser.name=firefox",
+    "x:vanilla": "vite dev examples/vanilla"
   },
   "dependencies": {
     "@standard-schema/spec": "^1.0.0",
