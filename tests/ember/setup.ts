@@ -20,7 +20,7 @@ class TestApp extends EmberApp {
   });
 }
 
-export function start() {
+export function start(): void {
   setApplication(
     TestApp.create({
       autoboot: false,

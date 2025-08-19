@@ -14,13 +14,13 @@
       </div>
     </div>
 
-    <script src="/testem.cjs" integrity="" data-embroider-ignore></script>
+    <script src="/testem.js" integrity="" data-embroider-ignore></script>
     <script type="module">
       import "ember-testing";
     </script>
 
     <script type="module">
-      import { start } from "./test-helper.ts";
+      import { start } from "./setup.ts";
       import.meta.glob("./**/*.test.{js,ts,gjs,gts}", { eager: true });
       start();
     </script>

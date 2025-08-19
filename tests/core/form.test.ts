@@ -42,7 +42,7 @@ test('re-registerElement()', async () => {
 
   submitHandler.mockClear();
 
-  form.registerElement(screen.getByTestId('b').element() as HTMLFormElement);
+  form.subtle.registerElement(screen.getByTestId('b').element() as HTMLFormElement);
 
   element.dispatchEvent(new SubmitEvent('submit'));
 

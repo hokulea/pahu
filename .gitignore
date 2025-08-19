@@ -9,7 +9,7 @@ tmp/
 node_modules/
 
 # misc
-.env*
+.env
 .pnp*
 .sass-cache
 .eslintcache

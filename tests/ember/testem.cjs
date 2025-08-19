@@ -2,8 +2,8 @@
 
 if (typeof module !== 'undefined') {
   module.exports = {
-    test_page: 'tests/index.html?hidepassed',
-    cwd: 'dist-tests',
+    test_page: 'index.html?hidepassed',
+    cwd: 'tests/ember/dist',
     disable_watching: true,
     launch_in_ci: ['Chrome'],
     launch_in_dev: ['Chrome'],

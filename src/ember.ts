@@ -5,7 +5,7 @@ import { createForm as upstreamCreateForm } from './form';
 
 import type { SignalFactory } from './-utils';
 import type { FieldElement, UserData } from './definitions';
-import type { FieldAPI as UpstreamFieldAPI, FieldConfig } from './field';
+import type { FieldAPI as UpstreamFieldAPI, FieldConfig, FieldValue } from './field';
 import type { FormAPI as UpstreamFormAPI, FormConfig } from './form';
 import type { AttrValue } from '@glint/template';
 import type { FunctionBasedModifier } from 'ember-modifier';
@@ -26,18 +26,19 @@ interface RegisterFieldSignature {
   };
 }
 
-export type FieldAPI<DATA extends UserData, NAME extends string, VALUE> = {
-  value: Exclude<VALUE, 'unknown'>;
+export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE>
+  extends UpstreamFieldAPI<DATA, NAME, VALUE> {
+  value: Exclude<FieldValue<DATA, NAME, VALUE>, 'unknown'>;
   registerElement: FunctionBasedModifier<RegisterFieldSignature>;
-} & UpstreamFieldAPI<DATA, NAME, VALUE>;
+}
 
-export type FormAPI<DATA extends UserData = UserData> = {
+export interface FormAPI<DATA extends UserData = UserData> extends UpstreamFormAPI<DATA> {
   registerElement: FunctionBasedModifier<RegisterFormSignature>;
 
   createField<NAME extends string, VALUE = NAME extends keyof DATA ? DATA[NAME] : AttrValue>(
     config: FieldConfig<DATA, NAME, VALUE>
   ): FieldAPI<DATA, NAME, VALUE>;
-} & UpstreamFormAPI<DATA>;
+}
 
 const signalFactory: SignalFactory = <T>(t?: T) => {
   const reactive = cell(t);
@@ -77,6 +78,10 @@ export function createForm<DATA extends UserData = UserData>(
 
     field.registerElement = modifier<RegisterFieldSignature>((element) => {
       field.subtle.registerElement(element);
+
+      return () => {
+        field.subtle.unregisterElement(element);
+      };
     });
 
     return field;
