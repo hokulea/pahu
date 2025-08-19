@@ -69,7 +69,7 @@ test('schema field validation: fail', async () => {
 });
 
 test('validation and revalidation', async () => {
-  const screen = await page.render(`
+  const screen = page.render(`
     <form novalidate data-testid="form">
       <input type="email" name="email">
     </form>
