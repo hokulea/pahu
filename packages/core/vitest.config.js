@@ -1,15 +1,11 @@
 import { defineConfig } from 'vitest/config';
 
-// https://vite.dev/config/
-// https://vitest.dev/config/
-// https://vitest.dev/guide/browser/config.html
 export default defineConfig({
   test: {
     typecheck: {
       enabled: true
     },
-    setupFiles: ['vitest-browser-html', './-setup.ts'],
-    // open: true,
+    setupFiles: ['vitest-browser-html', './tests/-setup.ts'],
     coverage: {
       enabled: true,
       provider: 'istanbul',
@@ -20,7 +16,7 @@ export default defineConfig({
       headless: true,
       screenshotFailures: false,
       provider: 'playwright',
-      testerHtmlPath: 'index.html',
+      testerHtmlPath: 'tests/index.html',
       instances: [
         // { browser: 'firefox' }
         { browser: 'chromium' },

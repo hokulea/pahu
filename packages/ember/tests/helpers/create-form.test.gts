@@ -6,7 +6,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { getProperty } from 'dot-prop';
 import sinon from 'sinon';
 
-import { createForm } from '#src/ember';
+import { createForm } from '#src';
 
 export function pick<V = unknown>(path: string, action?: (value: V) => void) {
   return function (event: object): V | void {

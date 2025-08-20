@@ -1,12 +1,9 @@
 import { modifier } from 'ember-modifier';
 import { cell } from 'ember-resources';
 
-import { createForm as upstreamCreateForm } from './form';
+import { createForm as upstreamCreateForm } from '@hokulea/pahu';
 
-import type { SignalFactory } from './-utils';
-import type { FieldElement, UserData } from './definitions';
-import type { FieldAPI as UpstreamFieldAPI, FieldConfig, FieldValue } from './field';
-import type { FormAPI as UpstreamFormAPI, FormConfig } from './form';
+import type { SignalFactory,FieldElement, UserData,FieldAPI as UpstreamFieldAPI, FieldConfig, FieldValue, FormAPI as UpstreamFormAPI, FormConfig} from '@hokulea/pahu';
 import type { AttrValue } from '@glint/template';
 import type { FunctionBasedModifier } from 'ember-modifier';
 
@@ -16,10 +13,10 @@ export type {
   UserData,
   ValidatedHandler,
   ValidationMode,
-  ValidationResult
-} from './definitions';
-export type { FieldConfig, FieldValidationHandler, FieldValue } from './field';
-export type { FormConfig, FormValidateHandler, SubmitHandler } from './form';
+  ValidationResult,
+  FieldConfig, FieldValidationHandler, FieldValue,
+  FormConfig, FormValidationHandler, SubmitHandler
+} from '@hokulea/pahu';
 
 interface RegisterFormSignature {
   Element: HTMLFormElement;

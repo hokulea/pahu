@@ -6,8 +6,9 @@ export type {
   UserData,
   UserValue,
   ValidatedHandler,
+  ValidationMode,
   ValidationResult
 } from './definitions';
 export type { FieldAPI, FieldConfig, FieldValidationHandler, FieldValue } from './field';
-export type { FormAPI, FormConfig, FormValidateHandler, SubmitHandler } from './form';
+export type { FormAPI, FormConfig, FormValidationHandler, SubmitHandler } from './form';
 export { createForm } from './form';

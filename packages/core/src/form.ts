@@ -37,12 +37,12 @@ export type SubmitHandler<DATA extends Record<string, unknown> = Record<string, 
 /**
  * Callback used for field level validation
  */
-export type FormValidateHandler<DATA extends UserData> = (data: {
+export type FormValidationHandler<DATA extends UserData> = (data: {
   data: FormOutput<DATA>;
 }) => ValidationResponse | Promise<ValidationResponse>;
 
 /** Validator for a Form. Either a callback function or pass a schema */
-type FormValidator<DATA extends UserData> = FormValidateHandler<DATA> | StandardSchemaV1;
+type FormValidator<DATA extends UserData> = FormValidationHandler<DATA> | StandardSchemaV1;
 
 /**
  * Configuration for a Form
