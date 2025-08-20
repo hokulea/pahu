@@ -3,19 +3,32 @@ import { cell } from 'ember-resources';
 
 import { createForm as upstreamCreateForm } from '@hokulea/pahu';
 
-import type { SignalFactory,FieldElement, UserData,FieldAPI as UpstreamFieldAPI, FieldConfig, FieldValue, FormAPI as UpstreamFormAPI, FormConfig} from '@hokulea/pahu';
 import type { AttrValue } from '@glint/template';
+import type {
+  FieldAPI as UpstreamFieldAPI,
+  FieldConfig,
+  FieldElement,
+  FieldValue,
+  FormAPI as UpstreamFormAPI,
+  FormConfig,
+  SignalFactory,
+  UserData
+} from '@hokulea/pahu';
 import type { FunctionBasedModifier } from 'ember-modifier';
 
 export type {
+  FieldConfig,
   FieldNames,
+  FieldValidationHandler,
+  FieldValue,
+  FormConfig,
+  FormValidationHandler,
   Issue,
+  SubmitHandler,
   UserData,
   ValidatedHandler,
   ValidationMode,
-  ValidationResult,
-  FieldConfig, FieldValidationHandler, FieldValue,
-  FormConfig, FormValidationHandler, SubmitHandler
+  ValidationResult
 } from '@hokulea/pahu';
 
 interface RegisterFormSignature {

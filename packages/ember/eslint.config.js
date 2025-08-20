@@ -1,3 +1,3 @@
-import ember from '@gossi/config-eslint/emmber';
+import ember from '@gossi/config-eslint/ember';
 
 export default ember(import.meta.dirname);

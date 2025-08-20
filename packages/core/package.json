@@ -9,17 +9,12 @@
   "imports": {
     "#src": "./src/index.ts",
     "#src/*": "./src/*",
-    "#ember": "./src/emmber.ts",
     "#tests/*": "./tests/*"
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./ember": {
-      "types": "./dist/ember.d.ts",
-      "default": "./dist/ember.js"
     },
     "./package.json": "./package.json"
   },
