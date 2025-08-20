@@ -1,4 +1,4 @@
-import { createForm, type SubmitHandler, type ValidatedHandler } from '#src/ember';
+import { createForm, type SubmitHandler, type ValidatedHandler } from '@hokulea/ember-pahu';
 
 import { Features } from '../components/features.gts';
 

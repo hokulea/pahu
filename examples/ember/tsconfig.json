@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "../../tsconfig.json",
-    "@ember/app-tsconfig",
-  ],
+  "extends": "@ember/app-tsconfig",
   "glint": {
     "environment": [
       "ember-loose",
@@ -10,15 +7,12 @@
     ]
   },
   "include": [
-    "."
+    "src"
   ],
   "compilerOptions": {
-    "rootDir": "../../",
-    "isolatedDeclarations": false,
     "types": [
       "ember-source/types",
-      "vite/client",
-      "qunit-dom"
+      "vite/client"
     ]
   }
 }

@@ -1,7 +1,7 @@
 import { uniqueId } from '@ember/helper';
 import { on } from '@ember/modifier';
 
-import { createForm, type SubmitHandler, type ValidatedHandler } from '#src/ember';
+import { createForm, type SubmitHandler, type ValidatedHandler } from '@hokulea/ember-pahu';
 
 import { pick } from '../-utils';
 import Errors from '../components/errors.gts';
