@@ -5,7 +5,7 @@ export default defineConfig({
     projects: ['./tests/core'],
     coverage: {
       enabled: true,
-      include: ['src/**/*.ts'],
+      // include: ['src/**/*.ts'],
       provider: 'istanbul',
       reporter: ['text', 'html', 'lcov', 'json']
     }

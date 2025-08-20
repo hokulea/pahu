@@ -1,4 +1,4 @@
-import { createForm } from '#src';
+import { createForm } from '@hokulea/pahu';
 
 import { renderFeatures } from '../-utils';
 

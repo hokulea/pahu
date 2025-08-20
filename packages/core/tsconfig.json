@@ -7,7 +7,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "isolatedDeclarations": false,
+    "isolatedDeclarations": true,
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "./dist",
@@ -25,9 +25,26 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": [
+      "@vitest/browser/matchers",
+      "@vitest/browser/providers/playwright",
+      "vitest-browser-html"
+    ],
+    "paths": {
+      "#src": [
+        "./src/index.ts"
+      ],
+      "#src/*": [
+        "./src/*"
+      ],
+      "#tests/*": [
+        "./tests/*"
+      ]
+    }
   },
   "include": [
-    "src"
+    "src",
+    "tests",
   ]
 }

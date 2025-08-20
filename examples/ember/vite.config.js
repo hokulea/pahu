@@ -13,12 +13,4 @@ export default defineConfig({
       extensions
     })
   ]
-  // build: {
-  //   rollupOptions: {
-  //     input: {
-  //       tests: 'tests/index.html',
-  //       index: 'index.html'
-  //     }
-  //   }
-  // }
 });
