@@ -1,6 +1,6 @@
 import * as v from 'valibot';
 
-import { createForm } from '#src';
+import { createForm } from '@hokulea/pahu';
 
 import { renderFeatures } from '../-utils';
 
@@ -65,6 +65,7 @@ function load() {
     name: 'password',
     element: passwordElem,
     validateOn: 'input',
+    revalidateOn: 'input',
     validate: passwordSchema
   });
 
