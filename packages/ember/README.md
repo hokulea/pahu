@@ -18,15 +18,13 @@
 - Typescript support
 - Component free
 
-## Ember
-
-Installation:
+## Installation
 
 ```sh
 pnpm add @hokulea/ember-pahu ember-modifier ember-resources
 ```
 
-Usage:
+## Usage
 
 ```glimmer-ts
 import { createForm } from '@hokulea/pahu/ember';
@@ -61,6 +59,6 @@ const validationHandler: ValidatedHandler = (event, data) =>
 </template>
 ```
 
-See:
+## Examples
 
-- [Ember Examples](../../examples/ember/templates/)
+- [Ember Examples](https://github.com/hokulea/pahu/tree/main/examples/ember/src/templates)
