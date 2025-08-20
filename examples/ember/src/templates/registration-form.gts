@@ -73,6 +73,7 @@ const passwordSchema = v.pipe(
             type="password"
             name="password"
             required
+            {{! template-lint-disable no-unsupported-role-attributes }}
             aria-errormessage={{if fd.issues errorId}}
             {{on "input" (pick "target.value" fd.setValue)}}
             {{fd.registerElement}}
@@ -96,6 +97,7 @@ const passwordSchema = v.pipe(
           <input
             type="password"
             name="confirm_password"
+            {{! template-lint-disable no-unsupported-role-attributes }}
             aria-errormessage={{if fd.issues errorId}}
             required
             {{fd.registerElement}}

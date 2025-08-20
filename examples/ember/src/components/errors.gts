@@ -1,5 +1,5 @@
 import type { TOC } from '@ember/component/template-only';
-import type { Issue } from '@hokulea/pahu';
+import type { Issue } from '@hokulea/ember-pahu';
 
 export interface ErrorsSignature {
   Args: {
