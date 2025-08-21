@@ -96,12 +96,25 @@ export function createForm<DATA extends UserData = UserData>(
     fieldConfig: FieldConfig<DATA, NAME, VALUE>
   ): FieldAPI<DATA, NAME, VALUE> => {
     const field = createField(fieldConfig) as unknown as FieldAPI<DATA, NAME, VALUE>;
+    const elements = new WeakSet<HTMLElement>();
+    const ignoreRemoval = new WeakSet<HTMLElement>();
 
     field.registerElement = modifier<RegisterFieldSignature>((element) => {
       field.subtle.registerElement(element);
 
+      if (elements.has(element)) {
+        ignoreRemoval.add(element);
+      } else {
+        elements.add(element);
+      }
+
       return () => {
-        field.subtle.unregisterElement(element);
+        if (ignoreRemoval.has(element)) {
+          ignoreRemoval.delete(element);
+        } else {
+          field.subtle.unregisterElement(element);
+          elements.delete(element);
+        }
       };
     });
 
