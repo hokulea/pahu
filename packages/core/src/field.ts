@@ -331,7 +331,8 @@ export class Field<
   }
 
   get value(): FieldValue<DATA, NAME, VALUE> | undefined {
-    return this.#value.get();
+    // return this.#value.get();
+    return this.#form.getInitialFieldData(this.#config.name);
   }
 
   setValue = (value: FieldValue<DATA, NAME, VALUE>): void => {

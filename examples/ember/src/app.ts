@@ -15,6 +15,7 @@ Router.map(function () {
   this.route('basic-fields');
   this.route('profile-form');
   this.route('registration-form');
+  this.route('tracked-data');
   /* eslint-enable @typescript-eslint/no-invalid-this */
 });
 

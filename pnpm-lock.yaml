@@ -72,6 +72,9 @@ importers:
       babel-plugin-ember-template-compilation:
         specifier: ^2.2.5
         version: 2.4.1
+      decorator-transforms:
+        specifier: ^2.3.0
+        version: 2.3.0(@babel/core@7.28.3)
       dot-prop:
         specifier: ^9.0.0
         version: 9.0.0
@@ -270,6 +273,9 @@ importers:
       babel-plugin-ember-template-compilation:
         specifier: ^2.2.5
         version: 2.4.1
+      decorator-transforms:
+        specifier: ^2.3.0
+        version: 2.3.0(@babel/core@7.28.3)
       dot-prop:
         specifier: ^9.0.0
         version: 9.0.0

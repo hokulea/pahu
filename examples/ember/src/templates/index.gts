@@ -5,6 +5,7 @@ import * as basicFields from './basic-fields';
 import * as nativeForm from './native-form';
 import * as profileForm from './profile-form';
 import * as registrationForm from './registration-form';
+import * as trackedData from './tracked-data';
 
 const examples = [
   {
@@ -26,6 +27,11 @@ const examples = [
     route: 'registration-form',
     title: registrationForm.title,
     features: registrationForm.features
+  },
+  {
+    route: 'tracked-data',
+    title: trackedData.title,
+    features: trackedData.features
   }
 ];
 

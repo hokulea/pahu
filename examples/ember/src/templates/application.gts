@@ -11,6 +11,8 @@ import { LinkTo } from '@ember/routing';
     <LinkTo @route="profile-form">Profile Form</LinkTo>
     |
     <LinkTo @route="registration-form">Registration Form</LinkTo>
+    |
+    <LinkTo @route="tracked-data">Tracked Data</LinkTo>
   </nav>
 
   {{outlet}}

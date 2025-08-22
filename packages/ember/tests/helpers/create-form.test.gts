@@ -1,5 +1,5 @@
 import { on } from '@ember/modifier';
-import { click, fillIn, render } from '@ember/test-helpers';
+import { click, fillIn, render, setupOnerror } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
@@ -44,6 +44,34 @@ module('createForm', (hooks) => {
     await click('button');
 
     assert.ok(submitHandler.calledWith({ givenName: 'Luke', familyName: 'Skywalker', age: '19' }));
+  });
+
+  test('use distinct field names', async function (assert) {
+    setupOnerror((e: Error) => {
+      assert.strictEqual(
+        e.message,
+        `Cannot register Field. Field with name 'givenName' already exists`,
+        'Expected assertion error message'
+      );
+    });
+
+    await render(
+      <template>
+        {{#let (createForm) as |f|}}
+          <form novalidate {{f.registerElement}}>
+            {{#let (f.createField name="givenName") as |fd|}}
+              <output name="givenName">{{fd.value}}</output>
+            {{/let}}
+
+            {{#let (f.createField name="givenName") as |fd|}}
+              <output name="familyName">{{fd.value}}</output>
+            {{/let}}
+
+            <button type="submit">Submit</button>
+          </form>
+        {{/let}}
+      </template>
+    );
   });
 
   module('Reactivity', () => {
@@ -139,7 +167,7 @@ module('createForm', (hooks) => {
       assert.dom('button').hasAria('disabled');
     });
 
-    test('form.validated is reactive', async (assert) => {
+    test('field.validated is reactive', async (assert) => {
       await render(
         <template>
           {{#let (createForm) as |f|}}
