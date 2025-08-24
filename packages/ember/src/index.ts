@@ -1,8 +1,3 @@
-import { getValue } from '@glimmer/tracking/primitives/cache';
-import Helper from '@ember/component/helper';
-import { invokeHelper } from '@ember/helper';
-import { getOwner, setOwner } from '@ember/owner';
-
 import { modifier } from 'ember-modifier';
 import { cell } from 'ember-resources';
 
@@ -10,13 +5,11 @@ import { createForm as upstreamCreateForm } from '@hokulea/pahu';
 
 import { localCopy } from './-local-copy';
 
-import type Owner from '@ember/owner';
 import type { AttrValue } from '@glint/template';
 import type {
   FieldAPI as UpstreamFieldAPI,
   FieldConfig,
   FieldElement,
-  FieldNames,
   FieldValue,
   FormAPI as UpstreamFormAPI,
   FormConfig,
@@ -84,168 +77,29 @@ const signalFactory: SignalFactory = <T>(t?: T) => {
   };
 };
 
-interface InternalForm<DATA extends UserData = UserData> {
-  getField(
-    name: FieldNames<DATA> | (string & {})
-  ):
-    | FieldAPI<
-        DATA,
-        FieldNames<DATA> | (string & {}),
-        keyof DATA & string extends keyof DATA ? DATA[keyof DATA & string] : unknown
-      >
-    | undefined;
-}
+const formsCache = new WeakMap();
 
-interface CreateFieldSignature<
-  DATA extends UserData = UserData,
-  NAME extends string = FieldNames<DATA> | (string & {}),
-  VALUE = NAME extends keyof DATA ? DATA[NAME] : AttrValue
-> {
-  Args: {
-    Positional: unknown[];
-    Named: FieldConfig<DATA, NAME, VALUE>;
-  };
-  Return: FieldAPI<DATA, NAME, VALUE>;
-}
-
-class CreateFieldHelper<
-  DATA extends UserData = UserData,
-  NAME extends string = FieldNames<DATA> | (string & {}),
-  VALUE = NAME extends keyof DATA ? DATA[NAME] : AttrValue
-> extends Helper<CreateFieldSignature<DATA, NAME, VALUE>> {
-  #field?: FieldAPI<DATA, NAME, VALUE>;
-
-  compute(
-    [form]: [FormAPI<DATA>],
-    config: FieldConfig<DATA, NAME, VALUE>
-  ): FieldAPI<DATA, NAME, VALUE> {
-    console.log('createField', config);
-
-    if (this.#field) {
-      this.#field.updateConfig(config);
-    } else {
-      this.#field = form.createField({
-        ...config
-      }) as unknown as FieldAPI<DATA, NAME, VALUE>;
-    }
-
-    return this.#field;
-  }
-}
-
-function createForm<DATA extends UserData = UserData>(
-  context: Owner,
+export function createForm<DATA extends UserData = UserData>(
   config: FormConfig<DATA> = {}
 ): FormAPI<DATA> {
-  const form = upstreamCreateForm({
-    ...config,
-    subtle: { makeSignal: signalFactory, makeLocalCopy: localCopy }
-  }) as unknown as FormAPI<DATA>;
+  let form = formsCache.get(config) as FormAPI<DATA> | undefined;
 
-  // const { createField } = form;
-
-  form.registerElement = modifier<RegisterFormSignature>((element) => {
-    form.subtle.registerElement(element);
-  });
-
-  // const context = getOwner(this);
-
-  form.createField = <
-    NAME extends string,
-    VALUE = NAME extends keyof DATA ? DATA[NAME] : AttrValue
-  >(
-    fieldConfig: FieldConfig<DATA, NAME, VALUE>
-  ): FieldAPI<DATA, NAME, VALUE> => {
-    return getValue(
-      invokeHelper(context, CreateFieldHelper<DATA>, () => {
-        return {
-          positional: [form],
-          named: fieldConfig
-        } as unknown as CreateFieldSignature<DATA>['Args'];
-      })
-    );
-  };
-
-  // form.createField = <
-  //   NAME extends string,
-  //   VALUE = NAME extends keyof DATA ? DATA[NAME] : AttrValue
-  // >(
-  //   fieldConfig: FieldConfig<DATA, NAME, VALUE>
-  // ): FieldAPI<DATA, NAME, VALUE> => {
-  //   const foundField = (form as unknown as InternalForm<DATA>).getField(fieldConfig.name);
-
-  //   if (foundField) {
-  //     return foundField as unknown as FieldAPI<DATA, NAME, VALUE>;
-  //   }
-
-  //   const field = createField(fieldConfig) as unknown as FieldAPI<DATA, NAME, VALUE>;
-
-  //   // const
-  //   const elements = new WeakSet<HTMLElement>();
-  //   const ignoreRemoval = new WeakSet<HTMLElement>();
-
-  //   field.registerElement = modifier<RegisterFieldSignature>((element) => {
-  //     field.subtle.registerElement(element);
-
-  //     if (elements.has(element)) {
-  //       ignoreRemoval.add(element);
-  //     } else {
-  //       elements.add(element);
-  //     }
-
-  //     return () => {
-  //       if (ignoreRemoval.has(element)) {
-  //         ignoreRemoval.delete(element);
-  //       } else {
-  //         field.subtle.unregisterElement(element);
-  //         elements.delete(element);
-  //       }
-  //     };
-  //   });
-
-  //   return field;
-  // };
-
-  return form;
-}
-
-interface CreateFormSignature<DATA extends UserData = UserData> {
-  Args: {
-    Positional: unknown[];
-    Named: FormConfig<DATA>;
-  };
-  Return: FormAPI<DATA>;
-}
-
-class CreateFormHelper<DATA extends UserData = UserData> extends Helper<CreateFormSignature<DATA>> {
-  #form?: FormAPI<DATA>;
-
-  compute(_: unknown[], config: FormConfig<DATA>): FormAPI<DATA> {
-    if (this.#form) {
-      this.#form.updateConfig(config);
-    } else {
-      this.#form = this.createForm({
-        ...config,
-        subtle: { makeSignal: signalFactory, makeLocalCopy: localCopy }
-      }) as unknown as FormAPI<DATA>;
-    }
-
-    return this.#form;
-  }
-
-  createForm(config: FormConfig<DATA> = {}): FormAPI<DATA> {
-    const form = upstreamCreateForm({
+  if (form) {
+    form.updateConfig(config);
+  } else {
+    form = upstreamCreateForm({
       ...config,
       subtle: { makeSignal: signalFactory, makeLocalCopy: localCopy }
     }) as unknown as FormAPI<DATA>;
 
+    const fieldCache = new Map();
+
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { createField } = form;
 
     form.registerElement = modifier<RegisterFormSignature>((element) => {
-      form.subtle.registerElement(element);
+      form?.subtle.registerElement(element);
     });
-
-    // const context = getOwner(this) as Owner;
 
     form.createField = <
       NAME extends string,
@@ -253,50 +107,62 @@ class CreateFormHelper<DATA extends UserData = UserData> extends Helper<CreateFo
     >(
       fieldConfig: FieldConfig<DATA, NAME, VALUE>
     ): FieldAPI<DATA, NAME, VALUE> => {
-      const foundField = (form as unknown as InternalForm<DATA>).getField(fieldConfig.name);
+      let field = fieldCache.get(fieldConfig.name) as FieldAPI<DATA, NAME, VALUE> | undefined;
 
-      if (foundField) {
-        return foundField as unknown as FieldAPI<DATA, NAME, VALUE>;
+      // this is the "inner function" of `createForm()`. When create form is
+      // invalidated, so are all `createField` invocations. As such, the
+      // `fieldConfig` (even value equal) is a new instance in memory and such
+      // can't be used as key for a WeakMap.
+      //
+      // The idea is to cache by field name. Ideally the error when using a
+      // field name twice from pahu core is thrown higher from here. Using the
+      // field name as cache silences this error.
+      //
+      // However, ember is striking at you in a different way here. By reusing a
+      // field twice, you read and write to the same tracked value twice and
+      // that ember doesn't like, so you get the infamous "You attempted to
+      // update 'value' on Meta, but it had already been used previously in the
+      // same computation" error, hah!
+      // Though this is only happening if you are setting a value, so it's not
+      // reliable. Given that is an unwanted case anyway, it's ok to not have it
+      // handled for now.
+
+      if (field) {
+        field.updateConfig(fieldConfig);
+      } else {
+        field = createField(fieldConfig) as unknown as FieldAPI<DATA, NAME, VALUE>;
+
+        // const
+        const elements = new WeakSet<HTMLElement>();
+        const ignoreRemoval = new WeakSet<HTMLElement>();
+
+        field.registerElement = modifier<RegisterFieldSignature>((element) => {
+          field?.subtle.registerElement(element);
+
+          if (elements.has(element)) {
+            ignoreRemoval.add(element);
+          } else {
+            elements.add(element);
+          }
+
+          return () => {
+            if (ignoreRemoval.has(element)) {
+              ignoreRemoval.delete(element);
+            } else {
+              field?.subtle.unregisterElement(element);
+              elements.delete(element);
+            }
+          };
+        });
+
+        fieldCache.set(fieldConfig.name, field);
       }
 
-      const field = createField(fieldConfig) as unknown as FieldAPI<DATA, NAME, VALUE>;
-
-      // const
-      const elements = new WeakSet<HTMLElement>();
-      const ignoreRemoval = new WeakSet<HTMLElement>();
-
-      field.registerElement = modifier<RegisterFieldSignature>((element) => {
-        field.subtle.registerElement(element);
-
-        if (elements.has(element)) {
-          ignoreRemoval.add(element);
-        } else {
-          elements.add(element);
-        }
-
-        return () => {
-          if (ignoreRemoval.has(element)) {
-            ignoreRemoval.delete(element);
-          } else {
-            field.subtle.unregisterElement(element);
-            elements.delete(element);
-          }
-        };
-      });
-
       return field;
-      // return getValue(
-      //   invokeHelper(context, CreateFieldHelper<DATA>, () => {
-      //     return {
-      //       positional: [form],
-      //       named: fieldConfig
-      //     } as unknown as CreateFieldSignature<DATA>['Args'];
-      //   })
-      // ) as FieldAPI<DATA, NAME, VALUE>;
     };
 
-    return form;
+    formsCache.set(config, form);
   }
-}
 
-export { CreateFormHelper as createForm };
+  return form;
+}

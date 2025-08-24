@@ -23,7 +23,7 @@ import type {
   ValidationResponse,
   ValidationResult
 } from './definitions';
-import type { Field, FieldAPI, FieldConfig } from './field';
+import type { Field, FieldAPI, FieldConfig, FieldValue } from './field';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import type { Except, OptionalKeysOf } from 'type-fest';
 
@@ -237,8 +237,28 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
       this.#data = this.#config.subtle.makeLocalCopy(() => this.#config.data ?? ({} as DATA));
     }
 
+    if (config.data) {
+      this.#data.set(config.data);
+      this.#updateFieldData(config.data);
+    }
+
     if (element) {
       this.#registerElement(element);
+    }
+  }
+
+  #updateFieldData(data: DATA) {
+    // pass down data to fields
+    for (const field of this.#fields.values()) {
+      const value = getProperty(data, field.name) as
+        | FieldValue<DATA, keyof DATA, UserValue>
+        | undefined;
+
+      if (value) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        field.setValue(value);
+      }
     }
   }
 
@@ -250,7 +270,6 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     name: NAME
   ): (NAME extends keyof DATA ? DATA[NAME] : UserValue) | undefined {
     return getProperty(this.#data.get(), name as string);
-    // return this.#data.get()[name];
   }
 
   #getFormData = (): Record<string, FormDataEntryValue> => {
@@ -401,7 +420,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   // #region Validation
 
   get ignoreNativeValidation(): boolean {
-    return Boolean(this.#config.ignoreNativeValidation);
+    return this.#config.ignoreNativeValidation;
   }
 
   handleValidation = async (event: Event): Promise<void> => {

@@ -224,6 +224,8 @@ export class Field<
     delete conf.element;
 
     this.#config = {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, unicorn/no-useless-fallback-in-spread
+      ...(this.#config ?? {}),
       ...DEFAULT_CONFIG,
       ...conf
     } as FieldConfig<DATA, NAME, VALUE>;
@@ -331,8 +333,7 @@ export class Field<
   }
 
   get value(): FieldValue<DATA, NAME, VALUE> | undefined {
-    // return this.#value.get();
-    return this.#form.getInitialFieldData(this.#config.name);
+    return this.#value.get();
   }
 
   setValue = (value: FieldValue<DATA, NAME, VALUE>): void => {
