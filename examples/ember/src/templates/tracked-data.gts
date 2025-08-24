@@ -77,9 +77,9 @@ function turnPalpatine() {
   Features:
   <Features @features={{features}} />
 
-  <button {{on "click" switchToObiWan}}>Switch to Obi Wan</button>
-  <button {{on "click" switchToAnakin}}>Switch to Anakin</button>
-  <button {{on "click" turnPalpatine}}>Turn Palpatine</button>
+  <button type="button" {{on "click" switchToObiWan}}>Switch to Obi Wan</button>
+  <button type="button" {{on "click" switchToAnakin}}>Switch to Anakin</button>
+  <button type="button" {{on "click" turnPalpatine}}>Turn Palpatine</button>
 
   <p>
     Profile:
