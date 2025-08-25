@@ -3,8 +3,6 @@ import { cell } from 'ember-resources';
 
 import { createForm as upstreamCreateForm } from '@hokulea/pahu';
 
-import { localCopy } from './-local-copy';
-
 import type { AttrValue } from '@glint/template';
 import type {
   FieldAPI as UpstreamFieldAPI,
@@ -89,7 +87,7 @@ export function createForm<DATA extends UserData = UserData>(
   } else {
     form = upstreamCreateForm({
       ...config,
-      subtle: { makeSignal: signalFactory, makeLocalCopy: localCopy }
+      subtle: { makeSignal: signalFactory }
     }) as unknown as FormAPI<DATA>;
 
     const fieldCache = new Map();

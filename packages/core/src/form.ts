@@ -97,7 +97,6 @@ export interface FormConfig<DATA extends UserData> {
   /** For advanced usage, mostly for framework integration */
   subtle?: {
     makeSignal?: SignalFactory;
-    makeLocalCopy?: <Value = unknown>(memoFn: () => Value) => Signal<Value>;
   };
 }
 
@@ -113,8 +112,7 @@ const DEFAULT_CONFIG: FormConfigDefaults<UserData> = {
   revalidateOn: 'change',
   ignoreNativeValidation: false,
   subtle: {
-    makeSignal: makeSignal,
-    makeLocalCopy: (fn) => makeSignal(fn())
+    makeSignal: makeSignal
   }
 };
 
@@ -200,7 +198,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   #config!: Omit<InternalFormConfig<DATA>, 'element'>;
   #fields = new Map<string, Field<DATA>>();
   #element?: HTMLFormElement;
-  #data!: Signal<DATA>;
+  #data: DATA = {} as DATA;
   #invalid: Signal<boolean>;
 
   constructor(config: FormConfig<DATA> = {}) {
@@ -232,13 +230,8 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
       ...conf
     } as InternalFormConfig<DATA>;
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (!this.#data) {
-      this.#data = this.#config.subtle.makeLocalCopy(() => this.#config.data ?? ({} as DATA));
-    }
-
     if (config.data) {
-      this.#data.set(config.data);
+      this.#data = config.data;
 
       for (const field of this.#fields.values()) {
         field.updateConfig();
@@ -257,7 +250,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   getInitialFieldData<NAME extends string = FieldNames<DATA> | (string & {})>(
     name: NAME
   ): (NAME extends keyof DATA ? DATA[NAME] : UserValue) | undefined {
-    return getProperty(this.#data.get(), name as string);
+    return getProperty(this.#data, name as string);
   }
 
   #getFormData = (): Record<string, FormDataEntryValue> => {
