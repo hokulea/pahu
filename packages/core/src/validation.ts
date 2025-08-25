@@ -64,6 +64,7 @@ export function validateNativeField(element: FieldElement): ValidationResponse {
   }
 
   return {
+    type: 'native',
     element: element,
     ...('value' in element ? { value: element.value } : {}),
     path: [element.name],

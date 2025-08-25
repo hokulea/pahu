@@ -25,6 +25,7 @@ import type {
 } from './definitions';
 import type { Field, FieldAPI, FieldConfig } from './field';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
+import type { Except, OptionalKeysOf } from 'type-fest';
 
 // #region Config & Types
 
@@ -37,7 +38,7 @@ export type SubmitHandler<DATA extends Record<string, unknown> = Record<string, 
 /**
  * Callback used for field level validation
  */
-export type FormValidationHandler<DATA extends UserData> = (data: {
+export type FormValidationHandler<DATA extends UserData = UserData> = (data: {
   data: FormOutput<DATA>;
 }) => ValidationResponse | Promise<ValidationResponse>;
 
@@ -95,18 +96,27 @@ export interface FormConfig<DATA extends UserData> {
 
   /** For advanced usage, mostly for framework integration */
   subtle?: {
-    signalFactory?: SignalFactory;
+    makeSignal?: SignalFactory;
   };
 }
 
-const DEFAULT_CONFIG: Partial<FormConfig<UserData>> = {
+type FormConfigDefaults<DATA extends UserData> = Except<
+  Required<Pick<FormConfig<DATA>, OptionalKeysOf<FormConfig<DATA>>>>,
+  'submit' | 'element' | 'data' | 'validate' | 'validated'
+> & {
+  subtle: Required<FormConfig<DATA>['subtle']>;
+};
+
+const DEFAULT_CONFIG: FormConfigDefaults<UserData> = {
   validateOn: 'submit',
   revalidateOn: 'change',
   ignoreNativeValidation: false,
   subtle: {
-    signalFactory: makeSignal
+    makeSignal: makeSignal
   }
 };
+
+type InternalFormConfig<DATA extends UserData> = FormConfig<DATA> & FormConfigDefaults<DATA>;
 
 // #region API
 
@@ -185,16 +195,16 @@ export interface FormAPI<DATA extends UserData> {
 
 /** Form implementation */
 export class Form<DATA extends UserData> implements FormAPI<DATA> {
-  #config!: Omit<FormConfig<DATA>, 'element'>;
+  #config!: Omit<InternalFormConfig<DATA>, 'element'>;
   #fields = new Map<string, Field<DATA>>();
   #element?: HTMLFormElement;
-  #makeSignal!: SignalFactory;
+  #data: DATA = {} as DATA;
   #invalid: Signal<boolean>;
 
   constructor(config: FormConfig<DATA> = {}) {
     this.updateConfig(config);
 
-    this.#invalid = this.#makeSignal(false);
+    this.#invalid = this.#config.subtle.makeSignal(false);
   }
 
   subtle = {
@@ -204,7 +214,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   };
 
   makeSignal<T>(t?: T): Signal<T> {
-    return this.#makeSignal(t);
+    return this.#config.subtle.makeSignal(t);
   }
 
   updateConfig(config: FormConfig<DATA>): void {
@@ -216,11 +226,17 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     this.#config = {
       // eslint-disable-next-line unicorn/no-useless-fallback-in-spread, @typescript-eslint/no-unnecessary-condition
       ...(this.#config ?? {}),
-      ...(DEFAULT_CONFIG as Partial<FormConfig<DATA>>),
+      ...DEFAULT_CONFIG,
       ...conf
-    };
+    } as InternalFormConfig<DATA>;
 
-    this.#makeSignal = this.#config.subtle?.signalFactory as SignalFactory;
+    if (config.data) {
+      this.#data = config.data;
+
+      for (const field of this.#fields.values()) {
+        field.updateConfig();
+      }
+    }
 
     if (element) {
       this.#registerElement(element);
@@ -232,9 +248,9 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   }
 
   getInitialFieldData<NAME extends string = FieldNames<DATA> | (string & {})>(
-    name: string
+    name: NAME
   ): (NAME extends keyof DATA ? DATA[NAME] : UserValue) | undefined {
-    return getProperty(this.#config.data ?? {}, name);
+    return getProperty(this.#data, name as string);
   }
 
   #getFormData = (): Record<string, FormDataEntryValue> => {
@@ -385,7 +401,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   // #region Validation
 
   get ignoreNativeValidation(): boolean {
-    return Boolean(this.#config.ignoreNativeValidation);
+    return this.#config.ignoreNativeValidation;
   }
 
   handleValidation = async (event: Event): Promise<void> => {
@@ -494,7 +510,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
     return validateOn === 'submit'
       ? // no need for dynamic validation, as validation always happens on submit
         'off'
-      : (validateOn ?? 'off');
+      : validateOn;
   }
 
   /**
@@ -511,7 +527,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
           (validateOn === 'change' && revalidateOn === 'focusout') ||
           validateOn === revalidateOn
         ? 'off'
-        : (revalidateOn ?? 'off');
+        : revalidateOn;
   }
 }
 

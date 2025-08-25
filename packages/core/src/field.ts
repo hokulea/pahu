@@ -129,14 +129,20 @@ export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE> {
   readonly name: NAME;
   /** Value of the field */
   readonly value?: FieldValue<DATA, NAME, VALUE>;
+
   /** Shall it ignore native (HTML) validation? */
   readonly ignoreNativeValidation: boolean;
+  /** Issues with this field */
   readonly issues: Issue[];
-
+  /** Whether the field is invalid as it has issues */
   readonly invalid: boolean;
-
   /** Whether this field has already been validated */
   readonly validated: boolean;
+
+  /** Whether the field has the value changed by a user */
+  readonly dirty: boolean;
+  /** Whether the field's value is based on initial data */
+  readonly pristine: boolean;
 
   /**
    * Removes this field from the form and cleans up all held references
@@ -149,8 +155,6 @@ export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE> {
    * @param config the new config
    */
   updateConfig(config: Omit<FieldConfig<DATA, NAME, VALUE>, 'name'>): void;
-
-  setIssues(issues: Issue[]): void;
 
   /**
    * Sets the fields value
@@ -184,9 +188,16 @@ export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE> {
 
 // #region Field
 
+type FieldState = 'pristine' | 'dirty';
+
 export interface FieldEvents {
   changed: [];
 }
+
+type InternalFieldConfig<DATA extends UserData, NAME extends string, VALUE> = Omit<
+  FieldConfig<DATA, NAME, VALUE>,
+  'data' | 'name' | 'element'
+>;
 
 const DEFAULT_CONFIG: Partial<FieldConfig<UserData, string, UserData>> = {
   validateOn: undefined,
@@ -200,47 +211,66 @@ export class Field<
   VALUE = NAME extends keyof DATA ? DATA[NAME] : UserValue
 > implements FieldAPI<DATA, NAME, VALUE>
 {
-  #config!: FieldConfig<DATA, NAME, VALUE>;
+  #config!: InternalFieldConfig<DATA, NAME, VALUE>;
   #form: Form<DATA>;
-  #value: Signal<FieldValue<DATA, NAME, VALUE>>;
-  #issues: Signal<Issue[]>;
   #elements = new Set<FieldElement>();
+
+  #name: NAME;
+  /**
+   * The initial value for this field set through the config for this field.
+   * There is also an initial value set at the form
+   *
+   * @see getInitialValue()
+   */
+  #initialFieldValue?: FieldValue<DATA, NAME, VALUE>;
+  #value: Signal<FieldValue<DATA, NAME, VALUE>>;
+  #state: FieldState = 'pristine';
+
+  #issues: Signal<Issue[]>;
   #validated: Signal<boolean>;
+
   #publisher = new Publisher<FieldEvents>();
   #linkedField?: Field<DATA, NAME, VALUE>;
+
+  get name(): NAME {
+    return this.#name;
+  }
 
   constructor(config: FullFieldConfig<DATA, NAME, VALUE>) {
     this.#form = config.form;
     this.#value = this.#form.makeSignal<FieldValue<DATA, NAME, VALUE>>();
     this.#issues = this.#form.makeSignal<Issue[]>([]);
     this.#validated = this.#form.makeSignal<boolean>(false);
+    this.#name = config.name as NAME;
     this.updateConfig(config);
   }
 
-  updateConfig(config: FieldConfig<DATA, NAME, VALUE>): void {
-    const element = config.element;
-    const conf = { ...config };
+  updateConfig(config: Omit<FieldConfig<DATA, NAME, VALUE>, 'name'> = {}): void {
+    // has element? let's register
+    if (config.element) {
+      this.#registerElement(config.element);
 
-    delete conf.element;
+      delete config.element;
+    }
+
+    // has value? set as initial and update value
+    if ('value' in config) {
+      this.#initialFieldValue = config.value;
+      delete config.value;
+    }
 
     this.#config = {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, unicorn/no-useless-fallback-in-spread
+      ...(this.#config ?? {}),
       ...DEFAULT_CONFIG,
-      ...conf
+      ...config
     } as FieldConfig<DATA, NAME, VALUE>;
-
-    const value = 'value' in config ? config.value : this.#form.getInitialFieldData(config.name);
-
-    if (value) {
-      this.#value.set(value as FieldValue<DATA, NAME, VALUE>);
-    }
-
-    if (element) {
-      this.#registerElement(element);
-    }
 
     if (config.linkedField) {
       this.#linkField(config.linkedField);
     }
+
+    this.#updateValue();
   }
 
   subtle = {
@@ -264,6 +294,8 @@ export class Field<
       this.#unlinkField(this.#linkedField);
     }
   }
+
+  // #region Internal
 
   #registerElement(element: FieldElement): void {
     if (!this.#elements.has(element)) {
@@ -318,16 +350,24 @@ export class Field<
     field.unsubscribe('changed', this.handleLinkValidation);
   }
 
-  setIssues = (issues: Issue[]): void => {
-    this.#issues.set(issues);
-  };
+  // #region Value
 
-  get issues(): Issue[] {
-    return this.#issues.get();
+  getInitialValue(): FieldValue<DATA, NAME, VALUE> | undefined {
+    // either form own config or form data
+    return (
+      this.#initialFieldValue ??
+      (this.#form.getInitialFieldData(this.#name) as FieldValue<DATA, NAME, VALUE> | undefined)
+    );
   }
 
-  get name(): NAME {
-    return this.#config.name as NAME;
+  #updateValue(): void {
+    if (this.pristine) {
+      const initialValue = this.getInitialValue();
+
+      if (initialValue) {
+        this.#value.set(initialValue);
+      }
+    }
   }
 
   get value(): FieldValue<DATA, NAME, VALUE> | undefined {
@@ -335,12 +375,33 @@ export class Field<
   }
 
   setValue = (value: FieldValue<DATA, NAME, VALUE>): void => {
+    this.#state = 'dirty';
     this.#value.set(value);
 
     this.#publisher.notify('changed');
   };
 
+  get dirty(): boolean {
+    return this.#state === 'dirty';
+  }
+
+  get pristine(): boolean {
+    return this.#state === 'pristine';
+  }
+
   // #region Validation
+
+  get issues(): Issue[] {
+    return this.#issues.get();
+  }
+
+  /**
+   * The form uses this to set the issues after validation
+   * @internal
+   */
+  setIssues = (issues: Issue[]): void => {
+    this.#issues.set(issues);
+  };
 
   get validated(): boolean {
     return this.#validated.get();
@@ -384,12 +445,12 @@ export class Field<
       ? // eslint-disable-next-line unicorn/no-await-expression-member
         (((await validateSchema(value, this.#config.validate)).issues ?? []) as Issue[])
       : transformValidationResponse(
-          await this.#config.validate?.({ value, name: this.name, form: this.#form })
+          await this.#config.validate?.({ value, name: this.#name, form: this.#form })
         );
 
     const issues = [...nativeValidation, ...customValidation].map((i) => ({
       ...i,
-      path: (i.path ?? [this.name]).map((segment) => normalizePathSegment(segment))
+      path: (i.path ?? [this.#name]).map((segment) => normalizePathSegment(segment))
     }));
 
     this.setIssues(issues);
