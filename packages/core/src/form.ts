@@ -23,7 +23,7 @@ import type {
   ValidationResponse,
   ValidationResult
 } from './definitions';
-import type { Field, FieldAPI, FieldConfig, FieldValue } from './field';
+import type { Field, FieldAPI, FieldConfig } from './field';
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import type { Except, OptionalKeysOf } from 'type-fest';
 
@@ -38,7 +38,7 @@ export type SubmitHandler<DATA extends Record<string, unknown> = Record<string, 
 /**
  * Callback used for field level validation
  */
-export type FormValidationHandler<DATA extends UserData> = (data: {
+export type FormValidationHandler<DATA extends UserData = UserData> = (data: {
   data: FormOutput<DATA>;
 }) => ValidationResponse | Promise<ValidationResponse>;
 
@@ -239,26 +239,14 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
 
     if (config.data) {
       this.#data.set(config.data);
-      this.#updateFieldData(config.data);
+
+      for (const field of this.#fields.values()) {
+        field.updateConfig();
+      }
     }
 
     if (element) {
       this.#registerElement(element);
-    }
-  }
-
-  #updateFieldData(data: DATA) {
-    // pass down data to fields
-    for (const field of this.#fields.values()) {
-      const value = getProperty(data, field.name) as
-        | FieldValue<DATA, keyof DATA, UserValue>
-        | undefined;
-
-      if (value) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        field.setValue(value);
-      }
     }
   }
 
