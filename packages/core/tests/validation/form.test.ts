@@ -2,7 +2,7 @@ import { page } from '@vitest/browser/context';
 import * as v from 'valibot';
 import { describe, expect, test } from 'vitest';
 
-import { createForm, type FieldValidationHandler, type FormValidationHandler } from '#src';
+import { createForm } from '#src';
 
 import type { Issue, ValidationResultFailure } from '#src/definitions';
 
