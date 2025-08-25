@@ -1,0 +1,158 @@
+release prepare
+
+Edits the package.json and changelog files to prepare for release.
+
+Options:
+  --version        Show version number                                 [boolean]
+  --help           Show help                                           [boolean]
+  --fromStdin      Read the summary of changes from stdin instead of building
+                   them from scratch.                                  [boolean]
+  --singlePackage  Allows you to run this command in a non monorepo and define
+                   the package name                                     [string]
+
+ExecaError: Command failed with exit code 1: node '/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js' --ignore-releases --next-version Release
+
+PackageJsonMissingNameError: The following package.jsons are missing the "name" field:
+examples/ember/package.json
+examples/vanilla/package.json
+    at validatePackages (/home/runner/work/pahu/pahu/node_modules/.pnpm/@manypkg+get-packages@2.2.2/node_modules/@manypkg/get-packages/dist/manypkg-get-packages.cjs.dev.js:57:11)
+    at getPackagesSync (/home/runner/work/pahu/pahu/node_modules/.pnpm/@manypkg+get-packages@2.2.2/node_modules/@manypkg/get-packages/dist/manypkg-get-packages.cjs.dev.js:45:3)
+    at getPackages (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:17:28)
+    at fromPath (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:36:22)
+    at load (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:12:12)
+    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:75:51)
+    at Generator.next (<anonymous>)
+    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:4:12)
+    at Object.run (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:20:12)
+    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js:7:5)
+    at Module._compile (node:internal/modules/cjs/loader:1734:14)
+    at Object..js (node:internal/modules/cjs/loader:1899:10)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Function._load (node:internal/modules/cjs/loader:1286:12) {
+  directories: [ 'examples/ember/package.json', 'examples/vanilla/package.json' ]
+}
+
+Error: Command failed with exit code 128: git describe --abbrev=0 --tags --first-parent
+fatal: No names found, cannot describe anything.
+    at makeError (/home/runner/work/pahu/pahu/node_modules/.pnpm/execa@5.1.1/node_modules/execa/lib/error.js:60:11)
+    at module.exports.sync (/home/runner/work/pahu/pahu/node_modules/.pnpm/execa@5.1.1/node_modules/execa/index.js:194:17)
+    at Object.lastTag (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/git.js:31:18)
+    at Changelog.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:32:56)
+    at Generator.next (<anonymous>)
+    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:4:12)
+    at Changelog.createMarkdown (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:31:16)
+    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:85:64)
+    at Generator.next (<anonymous>)
+    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:4:12)
+    at Object.run (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:20:12)
+    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js:7:5)
+    at getFinalError (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/execa@9.6.0/node_modules/execa/lib/return/final-error.js:6:9)
+    at makeError (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/execa@9.6.0/node_modules/execa/lib/return/result.js:108:16)
+    at getAsyncResult (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/execa@9.6.0/node_modules/execa/lib/methods/main-async.js:168:4)
+    at handlePromise (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/execa@9.6.0/node_modules/execa/lib/methods/main-async.js:151:17)
+    at async gatherChanges (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/release-plan@0.17.2/node_modules/release-plan/dist/gather-changes.js:8:20)
+    at async newChangelogContent (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/release-plan@0.17.2/node_modules/release-plan/dist/cli.js:90:19)
+    at async Object.handler (file:///home/runner/work/pahu/pahu/node_modules/.pnpm/release-plan@0.17.2/node_modules/release-plan/dist/cli.js:14:36) {
+  shortMessage: "Command failed with exit code 1: node '/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js' --ignore-releases --next-version Release",
+  command: 'node /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js --ignore-releases --next-version Release',
+  escapedCommand: "node '/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js' --ignore-releases --next-version Release",
+  cwd: '/home/runner/work/pahu/pahu',
+  durationMs: 431.637721,
+  failed: true,
+  timedOut: false,
+  isCanceled: false,
+  isGracefullyCanceled: false,
+  isTerminated: false,
+  isMaxBuffer: false,
+  isForcefullyTerminated: false,
+  exitCode: 1,
+  stdout: 'Error: Command failed with exit code 128: git describe --abbrev=0 --tags --first-parent\n' +
+    'fatal: No names found, cannot describe anything.\n' +
+    '    at makeError (/home/runner/work/pahu/pahu/node_modules/.pnpm/execa@5.1.1/node_modules/execa/lib/error.js:60:11)\n' +
+    '    at module.exports.sync (/home/runner/work/pahu/pahu/node_modules/.pnpm/execa@5.1.1/node_modules/execa/index.js:194:17)\n' +
+    '    at Object.lastTag (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/git.js:31:18)\n' +
+    '    at Changelog.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:32:56)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:4:12)\n' +
+    '    at Changelog.createMarkdown (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:31:16)\n' +
+    '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:85:64)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:4:12)\n' +
+    '    at Object.run (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:20:12)\n' +
+    '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js:7:5)',
+  stderr: 'PackageJsonMissingNameError: The following package.jsons are missing the "name" field:\n' +
+    'examples/ember/package.json\n' +
+    'examples/vanilla/package.json\n' +
+    '    at validatePackages (/home/runner/work/pahu/pahu/node_modules/.pnpm/@manypkg+get-packages@2.2.2/node_modules/@manypkg/get-packages/dist/manypkg-get-packages.cjs.dev.js:57:11)\n' +
+    '    at getPackagesSync (/home/runner/work/pahu/pahu/node_modules/.pnpm/@manypkg+get-packages@2.2.2/node_modules/@manypkg/get-packages/dist/manypkg-get-packages.cjs.dev.js:45:3)\n' +
+    '    at getPackages (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:17:28)\n' +
+    '    at fromPath (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:36:22)\n' +
+    '    at load (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:12:12)\n' +
+    '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:75:51)\n' +
+    '    at Generator.next (<anonymous>)\n' +
+    '    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:8:71\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:4:12)\n' +
+    '    at Object.run (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:20:12)\n' +
+    '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js:7:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n' +
+    '    at Object..js (node:internal/modules/cjs/loader:1899:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1469:32)\n' +
+    '    at Function._load (node:internal/modules/cjs/loader:1286:12) {\n' +
+    "  directories: [ 'examples/ember/package.json', 'examples/vanilla/package.json' ]\n" +
+    '}',
+  stdio: [
+    undefined,
+    'Error: Command failed with exit code 128: git describe --abbrev=0 --tags --first-parent\n' +
+      'fatal: No names found, cannot describe anything.\n' +
+      '    at makeError (/home/runner/work/pahu/pahu/node_modules/.pnpm/execa@5.1.1/node_modules/execa/lib/error.js:60:11)\n' +
+      '    at module.exports.sync (/home/runner/work/pahu/pahu/node_modules/.pnpm/execa@5.1.1/node_modules/execa/index.js:194:17)\n' +
+      '    at Object.lastTag (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/git.js:31:18)\n' +
+      '    at Changelog.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:32:56)\n' +
+      '    at Generator.next (<anonymous>)\n' +
+      '    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:8:71\n' +
+      '    at new Promise (<anonymous>)\n' +
+      '    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:4:12)\n' +
+      '    at Changelog.createMarkdown (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/changelog.js:31:16)\n' +
+      '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:85:64)\n' +
+      '    at Generator.next (<anonymous>)\n' +
+      '    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:8:71\n' +
+      '    at new Promise (<anonymous>)\n' +
+      '    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:4:12)\n' +
+      '    at Object.run (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:20:12)\n' +
+      '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js:7:5)',
+    'PackageJsonMissingNameError: The following package.jsons are missing the "name" field:\n' +
+      'examples/ember/package.json\n' +
+      'examples/vanilla/package.json\n' +
+      '    at validatePackages (/home/runner/work/pahu/pahu/node_modules/.pnpm/@manypkg+get-packages@2.2.2/node_modules/@manypkg/get-packages/dist/manypkg-get-packages.cjs.dev.js:57:11)\n' +
+      '    at getPackagesSync (/home/runner/work/pahu/pahu/node_modules/.pnpm/@manypkg+get-packages@2.2.2/node_modules/@manypkg/get-packages/dist/manypkg-get-packages.cjs.dev.js:45:3)\n' +
+      '    at getPackages (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:17:28)\n' +
+      '    at fromPath (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:36:22)\n' +
+      '    at load (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/configuration.js:12:12)\n' +
+      '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:75:51)\n' +
+      '    at Generator.next (<anonymous>)\n' +
+      '    at /home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:8:71\n' +
+      '    at new Promise (<anonymous>)\n' +
+      '    at __awaiter (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:4:12)\n' +
+      '    at Object.run (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/lib/cli.js:20:12)\n' +
+      '    at Object.<anonymous> (/home/runner/work/pahu/pahu/node_modules/.pnpm/github-changelog@2.1.1/node_modules/github-changelog/bin/cli.js:7:5)\n' +
+      '    at Module._compile (node:internal/modules/cjs/loader:1734:14)\n' +
+      '    at Object..js (node:internal/modules/cjs/loader:1899:10)\n' +
+      '    at Module.load (node:internal/modules/cjs/loader:1469:32)\n' +
+      '    at Function._load (node:internal/modules/cjs/loader:1286:12) {\n' +
+      "  directories: [ 'examples/ember/package.json', 'examples/vanilla/package.json' ]\n" +
+      '}'
+  ],
+  ipcOutput: [],
+  pipedFrom: []
+}
