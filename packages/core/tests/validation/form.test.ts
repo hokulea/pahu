@@ -1,7 +1,8 @@
+import { page } from '@vitest/browser/context';
 import * as v from 'valibot';
 import { describe, expect, test } from 'vitest';
 
-import { createForm } from '#src';
+import { createForm, type FieldValidationHandler, type FormValidationHandler } from '#src';
 
 import type { Issue, ValidationResultFailure } from '#src/definitions';
 
@@ -211,4 +212,64 @@ describe('schema form validation: fail', () => {
       message: 'Invalid type: Expected number but received "42"'
     });
   });
+});
+
+test('Form + native field + custom field validation', async () => {
+  const formData = { givenName: 'foo123', familyName: 'Smith' };
+
+  const screen = page.render(`
+        <form novalidate data-testid="form">
+          <input type="test" name="givenName" required pattern="^[A-Za-z]+$">
+        </form>
+      `);
+
+  const form = createForm({
+    data: formData,
+    element: screen.getByTestId('form').element() as HTMLFormElement,
+    validate: ({ data }) =>
+      // eslint-disable-next-line unicorn/no-negated-condition
+      data.givenName.charAt(0).toUpperCase() !== data.givenName.charAt(0)
+        ? {
+            path: ['givenName'],
+            type: 'uppercase',
+            value: data.givenName,
+            message: 'Given name must be upper case!'
+          }
+        : undefined
+  });
+
+  form.createField({
+    name: 'givenName',
+    element: screen.q('[name="givenName"]').element() as HTMLInputElement,
+    validate: ({ value }) =>
+      value?.toLowerCase().startsWith('foo')
+        ? {
+            type: 'notFoo',
+            value,
+            message: 'Foo is an invalid given name!'
+          }
+        : undefined
+  });
+
+  const result = (await form.validate()) as ValidationResultFailure;
+
+  expect(result.issues[0]).toMatchObject({
+    path: ['givenName'],
+    type: 'uppercase',
+    value: formData.givenName,
+    message: 'Given name must be upper case!'
+  });
+
+  expect(result.issues[1]).toMatchObject({
+    path: ['givenName'],
+    type: 'native'
+  });
+
+  expect(result.issues[2]).toMatchObject({
+    type: 'notFoo',
+    value: formData.givenName,
+    message: 'Foo is an invalid given name!'
+  });
+
+  console.log(result);
 });
