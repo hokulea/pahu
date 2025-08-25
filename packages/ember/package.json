@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Ember adapter for Hokulea headless forms",
   "keywords": [
-    "form", "headless", "agnostic", "native", "standard schema", "linked fields", "validation", "ember"
+    "form", "headless", "native", "standard schema", "linked fields", "validation", "ember"
   ],
   "license": "MIT",
   "author": "Thomas Gossmann",

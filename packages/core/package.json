@@ -5,9 +5,12 @@
   "keywords": [
     "form", "headless", "agnostic", "native", "standard schema", "linked fields", "validation"
   ],
-  "repository": "https://github.com/hokulea/pahu",
   "license": "MIT",
   "author": "Thomas Gossmann",
+  "repository": "https://github.com/hokulea/pahu",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "type": "module",
   "imports": {
     "#src": "./src/index.ts",
