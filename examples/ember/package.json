@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "@pahu-examples/ember",
   "author": "Thomas Gossmann",
   "type": "module",
   "scripts": {

@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "@pahu-examples/vanilla",
   "author": "Thomas Gossmann",
   "type": "module",
   "scripts": {
