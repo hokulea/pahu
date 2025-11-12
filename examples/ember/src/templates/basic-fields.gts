@@ -10,7 +10,9 @@ import { Features } from '../components/features.gts';
 export const title = 'Basic Form w/ Fields';
 export const features = ['Manual Field registration', 'Access to Field API'];
 
-const submitHandler: SubmitHandler = (data) => console.log('Submit Handler', data);
+const submitHandler: SubmitHandler = (data: { some: string }) =>
+  console.log('Submit Handler', data);
+
 const validationHandler: ValidatedHandler = (event, data) =>
   console.log('Validation Handler on:', event, data);
 
