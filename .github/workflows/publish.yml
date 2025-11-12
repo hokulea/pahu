@@ -10,7 +10,7 @@ on:
       - main
       - master
     paths:
-      - '.release-plan.json'
+      - ".release-plan.json"
 
 concurrency:
   group: publish-${{ github.head_ref || github.ref }}
@@ -30,6 +30,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup
         uses: ./.github/actions/setup
+        # we are doing this to make sure theat the gloabally installed npm is new enough to support OIDC
+      - name: Install latest npm (for Trusted Publishing)
+        run: npm install -g npm@latest
       - name: Publish to NPM
         run: NPM_CONFIG_PROVENANCE=true pnpm release-plan publish
         env:
