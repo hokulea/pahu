@@ -2,7 +2,13 @@
 // some type tests below
 // uncomment for quick feedback - not all is testable with type tests (yet?)
 
-// import { createForm } from './form';
+// import { createForm, type FormValidationHandler, type SubmitHandler } from './form';
+
+// const submitHandler: SubmitHandler<{ some: string }> = (data) =>
+//   console.log('Submit Handler', data);
+// const validationHandler: FormValidationHandler<{ username: string }> = ({ data }) => ({
+//   message: `${data.username} is wrong`
+// });
 
 // const deepForm = createForm({
 //   data: {
@@ -12,7 +18,9 @@
 //       { email: '', verified: true, primary: true },
 //       { email: '', verified: false, primary: false }
 //     ]
-//   }
+//   },
+//   submit: submitHandler,
+//   validate: validationHandler
 // });
 
 // deepForm.createField({ name: '' });

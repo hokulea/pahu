@@ -31,9 +31,8 @@ import type { Except, OptionalKeysOf } from 'type-fest';
 
 export type FormOutput<DATA extends UserData> = Record<string, FormDataEntryValue> & DATA;
 
-export type SubmitHandler<DATA extends Record<string, unknown> = Record<string, unknown>> = (
-  data: DATA
-) => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type SubmitHandler<DATA extends Record<string, any> = any> = (data: DATA) => void;
 
 /**
  * Callback used for field level validation
