@@ -1,9 +1,15 @@
 {
   "name": "@hokulea/pahu",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Hokulea headless forms with adapters for frameworks",
   "keywords": [
-    "form", "headless", "agnostic", "native", "standard schema", "linked fields", "validation"
+    "form",
+    "headless",
+    "agnostic",
+    "native",
+    "standard schema",
+    "linked fields",
+    "validation"
   ],
   "license": "MIT",
   "author": "Thomas Gossmann",
