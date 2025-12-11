@@ -1,6 +1,6 @@
 {
   "name": "@hokulea/pahu",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Hokulea headless forms with adapters for frameworks",
   "keywords": [
     "form",
