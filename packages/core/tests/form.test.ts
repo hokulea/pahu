@@ -1,7 +1,9 @@
 import { page } from '@vitest/browser/context';
 import { describe, expect, test, vi } from 'vitest';
 
-import { createForm } from '#src';
+import { createForm, type SubmitHandler } from '#src';
+
+import type { ValidationResultFailure } from '#src/definitions';
 
 test('default options', () => {
   const form = createForm();
@@ -115,5 +117,64 @@ describe('Submission', () => {
     await form.submit();
 
     expect(submitHandler).toBeCalledWith(formData);
+  });
+
+  test('submit handler validation', async () => {
+    const formData = {
+      email: 'hello@there',
+      profile: {
+        name: 'Obi Wan Kenobi',
+        age: 18
+      }
+    };
+
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    const submitHandler: SubmitHandler<typeof formData> = (data) => {
+      return {
+        success: false,
+        issues: [
+          {
+            message: 'email required',
+            path: ['email']
+          },
+          {
+            message: 'name required',
+            path: ['profile', 'name']
+          },
+          {
+            message: 'something else went wrong'
+          }
+        ],
+        value: data
+      };
+    };
+    const form = createForm({ data: formData, submit: submitHandler });
+
+    const emailField = form.createField({ name: 'email' });
+    const nameField = form.createField({ name: 'profile.name' });
+
+    form.createField({ name: 'profile.age' });
+
+    const result = (await form.submit()) as ValidationResultFailure;
+
+    expect(result.success).toBeFalsy();
+    expect(result.issues[0]).toMatchObject({ path: ['email'], message: 'email required' });
+    expect(result.issues[1]).toMatchObject({
+      path: ['profile', 'name'],
+      message: 'name required'
+    });
+
+    expect(emailField.issues).toMatchObject([{ path: ['email'], message: 'email required' }]);
+    expect(nameField.issues).toMatchObject([
+      {
+        path: ['profile', 'name'],
+        message: 'name required'
+      }
+    ]);
+    expect(form.issues).toMatchObject([
+      {
+        message: 'something else went wrong'
+      }
+    ]);
   });
 });

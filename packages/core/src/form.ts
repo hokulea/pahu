@@ -32,7 +32,10 @@ import type { Except, OptionalKeysOf } from 'type-fest';
 export type FormOutput<DATA extends UserData> = Record<string, FormDataEntryValue> & DATA;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type SubmitHandler<DATA extends Record<string, any> = any> = (data: DATA) => void;
+export type SubmitHandler<DATA extends Record<string, any> = any> = (
+  data: DATA
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+) => void | ValidationResult<DATA> | Promise<ValidationResult<DATA> | void>;
 
 /**
  * Callback used for field level validation
@@ -126,6 +129,9 @@ export interface FormAPI<DATA extends UserData> {
   /** Whether the form is currently invalid (due to failing validations) */
   readonly invalid: boolean;
 
+  /** Issues with this form */
+  readonly issues: Issue[];
+
   /** The event at which fields will be validated (can be overridden at field level) */
   readonly fieldValidationEvent: ValidationMode | undefined;
 
@@ -177,7 +183,7 @@ export interface FormAPI<DATA extends UserData> {
    *
    * Use `submit` and `invalidated` handlers
    */
-  submit(): Promise<void>;
+  submit(): Promise<ValidationResult>;
 
   /**
    * Reset the form
@@ -198,11 +204,14 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   #fields = new Map<string, Field<DATA>>();
   #element?: HTMLFormElement;
   #data: DATA = {} as DATA;
+
+  #issues: Signal<Issue[]>;
   #invalid: Signal<boolean>;
 
   constructor(config: FormConfig<DATA> = {}) {
     this.updateConfig(config);
 
+    this.#issues = this.#config.subtle.makeSignal<Issue[]>([]);
     this.#invalid = this.#config.subtle.makeSignal(false);
   }
 
@@ -296,28 +305,50 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
 
   // #region Submission
 
-  submit = async (): Promise<void> => {
-    await this.handleSubmit();
+  submit = async (): Promise<ValidationResult<Record<string, unknown>>> => {
+    return await this.handleSubmit();
   };
 
-  handleSubmit = async (event?: SubmitEvent): Promise<void> => {
+  handleSubmit = async (
+    event?: SubmitEvent
+  ): Promise<ValidationResult<Record<string, unknown>>> => {
     event?.preventDefault();
 
     const validationResult = await this.validate();
 
-    if (validationResult.success) {
-      const data = {};
-
-      for (const [key, value] of Object.entries(validationResult.value)) {
-        setProperty(data, key, value);
-      }
-
-      this.#invalid.set(false);
-      this.#config.submit?.(data);
-    } else {
+    if (!validationResult.success) {
       this.#invalid.set(true);
       this.#config.validated?.('submit', validationResult);
+
+      return validationResult;
     }
+
+    const data = {};
+
+    for (const [key, value] of Object.entries(validationResult.value)) {
+      setProperty(data, key, value);
+    }
+
+    const submitResult = await this.#config.submit?.(data);
+    const valid = !submitResult || submitResult.success;
+
+    if (!valid) {
+      const normalizedIssues = this.#normalizeIssues(submitResult.issues);
+
+      this.#attachIssues(normalizedIssues);
+      this.#invalid.set(false);
+
+      return {
+        success: false,
+        value: data,
+        issues: normalizedIssues
+      };
+    }
+
+    return {
+      success: true,
+      value: data
+    };
   };
 
   reset = (): void => {
@@ -399,6 +430,10 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
 
   // #region Validation
 
+  get issues(): Issue[] {
+    return this.#issues.get();
+  }
+
   get ignoreNativeValidation(): boolean {
     return this.#config.ignoreNativeValidation;
   }
@@ -436,16 +471,35 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
       }
     }
 
-    const normalizedIssues = issues
-      .filter((i) => i.path !== undefined)
-      .map((i) => ({
-        ...i,
-        path: i.path ? i.path.map((segment) => normalizePathSegment(segment)) : undefined
-      }));
+    const normalizedIssues = this.#normalizeIssues(issues);
 
+    this.#attachIssues(normalizedIssues);
+
+    if (issues.length === 0) {
+      return {
+        success: true,
+        value: data
+      };
+    }
+
+    return {
+      success: false,
+      value: data,
+      issues: normalizedIssues
+    };
+  };
+
+  #normalizeIssues(issues: Issue[]) {
+    return issues.map((i) => ({
+      ...i,
+      path: i.path ? i.path.map((segment) => normalizePathSegment(segment)) : undefined
+    }));
+  }
+
+  #attachIssues(issues: Issue[]) {
     // attach issues to fields
     const issuesByField = Object.groupBy(
-      normalizedIssues
+      issues
         .filter((i) => i.path !== undefined)
         .map((i) => ({
           ...i,
@@ -462,19 +516,11 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
       }
     }
 
-    if (issues.length === 0) {
-      return {
-        success: true,
-        value: data
-      };
-    }
+    // attach issues to form
+    const formIssues = issues.filter((i) => !i.path);
 
-    return {
-      success: false,
-      value: data,
-      issues: normalizedIssues
-    };
-  };
+    this.#issues.set(formIssues);
+  }
 
   #validateNativeOnUnregisteredFields() {
     if (!this.#element || this.ignoreNativeValidation) {
