@@ -34,7 +34,8 @@ export type FormOutput<DATA extends UserData> = Record<string, FormDataEntryValu
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SubmitHandler<DATA extends Record<string, any> = any> = (
   data: DATA
-) => ValidationResult<DATA> | undefined | Promise<ValidationResult<DATA> | undefined>;
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+) => void | ValidationResult<DATA> | Promise<ValidationResult<DATA> | void>;
 
 /**
  * Callback used for field level validation
