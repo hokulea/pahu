@@ -1,6 +1,6 @@
 {
   "name": "@hokulea/ember-pahu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Ember adapter for Hokulea headless forms",
   "keywords": [
     "form",

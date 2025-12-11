@@ -2,38 +2,30 @@
   "solution": {
     "@hokulea/pahu": {
       "impact": "minor",
-      "oldVersion": "0.0.1",
-      "newVersion": "0.1.0",
+      "oldVersion": "0.1.0",
+      "newVersion": "0.2.0",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./packages/core/package.json"
     },
     "@hokulea/ember-pahu": {
       "impact": "patch",
-      "oldVersion": "0.0.1",
-      "newVersion": "0.0.2",
+      "oldVersion": "0.0.2",
+      "newVersion": "0.0.3",
       "tagName": "latest",
       "constraints": [
         {
           "impact": "patch",
           "reason": "Has dependency `workspace:*` on @hokulea/pahu"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./packages/ember/package.json"
     }
   },
-  "description": "## Release (2025-11-12)\n\n* @hokulea/pahu 0.1.0 (minor)\n* @hokulea/ember-pahu 0.0.2 (patch)\n\n#### :rocket: Enhancement\n* `@hokulea/pahu`\n  * [#15](https://github.com/hokulea/pahu/pull/15) Allow more end-user types ([@gossi](https://github.com/gossi))\n\n#### :house: Internal\n* Other\n  * [#17](https://github.com/hokulea/pahu/pull/17) Name all packages for releasing ([@gossi](https://github.com/gossi))\n  * [#16](https://github.com/hokulea/pahu/pull/16) Support Trusted Publishing ([@gossi](https://github.com/gossi))\n* `@hokulea/pahu`, `@hokulea/ember-pahu`\n  * [#13](https://github.com/hokulea/pahu/pull/13) Update glint to v2 ([@gossi](https://github.com/gossi))\n\n#### Committers: 1\n- Thomas Gossmann ([@gossi](https://github.com/gossi))\n"
+  "description": "## Release (2025-12-11)\n\n* @hokulea/pahu 0.2.0 (minor)\n* @hokulea/ember-pahu 0.0.3 (patch)\n\n#### :rocket: Enhancement\n* `@hokulea/pahu`\n  * [#19](https://github.com/hokulea/pahu/pull/19) Add validation to submission of a form ([@gossi](https://github.com/gossi))\n\n#### :house: Internal\n* [#21](https://github.com/hokulea/pahu/pull/21) Remove unused ENV var ([@gossi](https://github.com/gossi))\n\n#### Committers: 1\n- Thomas Gossmann ([@gossi](https://github.com/gossi))\n"
 }
