@@ -262,7 +262,7 @@ importers:
         specifier: ^17.0.4
         version: 17.0.4
       babel-plugin-ember-template-compilation:
-        specifier: ^2.2.5
+        specifier: ^2.4.1
         version: 2.4.1
       decorator-transforms:
         specifier: ^2.3.0
@@ -5206,6 +5206,7 @@ packages:
   tsdown@0.17.4:
     resolution: {integrity: sha512-z+kNuv1rwM1POQIufDUVrdNc/uGy0ueRVafCyDH39IdHxin4JXgB8DNGSPoqdIpcOpqUoRbNreK8NxENFmlhKw==}
     engines: {node: '>=20.19.0'}
+    deprecated: Including an unexpected breaking change (copy behavior)
     hasBin: true
     peerDependencies:
       '@arethetypeswrong/core': ^0.18.1
