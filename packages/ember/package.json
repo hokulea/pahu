@@ -72,7 +72,7 @@
     "dot-prop": "^9.0.0",
     "ember-qunit": "^9.0.2",
     "ember-source": "~6.5.0",
-    "ember-strict-application-resolver": "^0.1.0",
+    "ember-strict-application-resolver": "^0.1.1",
     "ember-template-imports": "4.3.0",
     "ember-template-lint": "^7.9.1",
     "eslint": "^9.29.0",
