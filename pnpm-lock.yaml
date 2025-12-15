@@ -256,7 +256,7 @@ importers:
         specifier: ^6.0.4
         version: 6.0.4(@babel/core@7.28.5)(rollup@4.46.4)
       '@types/qunit':
-        specifier: ^2.19.12
+        specifier: ^2.19.13
         version: 2.19.13
       '@types/sinon':
         specifier: ^17.0.4
