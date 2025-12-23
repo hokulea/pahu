@@ -12,7 +12,7 @@ jobs:
     name: lint:js
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup
         uses: ./.github/actions/setup
       - run: pnpm lint:js
@@ -21,7 +21,7 @@ jobs:
     name: lint:hbs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup
         uses: ./.github/actions/setup
       - run: pnpm lint:hbs
@@ -30,7 +30,7 @@ jobs:
     name: lint:types
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup
         uses: ./.github/actions/setup
       - run: pnpm lint:types
@@ -39,7 +39,7 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup
         uses: ./.github/actions/setup
       - name: Install Playwright Browsers
