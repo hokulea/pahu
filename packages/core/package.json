@@ -63,7 +63,7 @@
     "playwright": "^1.57.0",
     "prettier": "^3.5.3",
     "release-plan": "^0.17.2",
-    "tsdown": "^0.18.2",
+    "tsdown": "^0.18.3",
     "type-fest": "^4.41.0",
     "typescript": "5.9.3",
     "valibot": "^1.2.0",
