@@ -73,7 +73,7 @@
     "ember-qunit": "^9.0.4",
     "ember-source": "~6.9.0",
     "ember-strict-application-resolver": "^0.1.1",
-    "ember-template-imports": "4.3.0",
+    "ember-template-imports": "4.4.0",
     "ember-template-lint": "^7.9.1",
     "eslint": "^9.29.0",
     "eslint-plugin-ember": "^12.5.0",
