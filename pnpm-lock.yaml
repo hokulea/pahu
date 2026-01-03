@@ -180,8 +180,8 @@ importers:
         specifier: ^0.17.2
         version: 0.17.2
       tsdown:
-        specifier: ^0.18.3
-        version: 0.18.3(synckit@0.11.11)(typescript@5.9.3)
+        specifier: ^0.18.4
+        version: 0.18.4(synckit@0.11.11)(typescript@5.9.3)
       type-fest:
         specifier: ^5.3.1
         version: 5.3.1
@@ -310,8 +310,8 @@ importers:
         specifier: ^3.17.0
         version: 3.17.0(handlebars@4.7.8)(underscore@1.13.7)
       tsdown:
-        specifier: ^0.18.3
-        version: 0.18.3(synckit@0.11.11)(typescript@5.9.3)
+        specifier: ^0.18.4
+        version: 0.18.4(synckit@0.11.11)(typescript@5.9.3)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -5250,8 +5250,8 @@ packages:
     peerDependencies:
       typescript: '>=4.0.0'
 
-  tsdown@0.18.3:
-    resolution: {integrity: sha512-OVFzktKDTglFAUh/WO8WamBUbZoBlJ9m7NgZZrVyIKe32BfXBeRZ+soFFpuOGVP8g8OU4tOLOpTyPTELWvcTFw==}
+  tsdown@0.18.4:
+    resolution: {integrity: sha512-J/tRS6hsZTkvqmt4+xdELUCkQYDuUCXgBv0fw3ImV09WPGbEKfsPD65E+WUjSu3E7Z6tji9XZ1iWs8rbGqB/ZA==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -11690,7 +11690,7 @@ snapshots:
       picomatch: 4.0.3
       typescript: 5.9.3
 
-  tsdown@0.18.3(synckit@0.11.11)(typescript@5.9.3):
+  tsdown@0.18.4(synckit@0.11.11)(typescript@5.9.3):
     dependencies:
       ansis: 4.2.0
       cac: 6.7.14
