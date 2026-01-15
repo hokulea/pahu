@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - 'v*'
+      - "v*"
 
 jobs:
   lint-js:
@@ -38,6 +38,10 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - uses: actions/checkout@v6
       - name: Setup
@@ -48,5 +52,5 @@ jobs:
         run: pnpm test
       - uses: qltysh/qlty-action/coverage@v2
         with:
-          token: ${{secrets.QLTY_COVERAGE_TOKEN}}
+          oidc: true
           files: packages/core/coverage/lcov.info
