@@ -51,7 +51,7 @@
     "ember-resources": "^7.0.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^7.29.0",
     "@babel/plugin-transform-typescript": "^7.28.6",
     "@babel/runtime": "^7.28.6",
     "@ember/app-tsconfig": "^2.0.0",
