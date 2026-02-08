@@ -60,7 +60,7 @@
     "@vitest/coverage-istanbul": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "eslint": "^9.30.1",
-    "playwright": "^1.58.1",
+    "playwright": "^1.58.2",
     "prettier": "^3.5.3",
     "release-plan": "^0.17.4",
     "tsdown": "^0.19.0",
