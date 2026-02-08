@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@hokulea/pahu": "workspace:*",
-    "ember-modifier": "4.2.2",
+    "ember-modifier": "4.3.0",
     "ember-resources": "^7.0.6"
   },
   "devDependencies": {
