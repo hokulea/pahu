@@ -1,5 +1,15 @@
 # Changelog
 
+## Release (2026-02-15)
+
+
+
+#### :house: Internal
+* [#76](https://github.com/hokulea/pahu/pull/76) Remove unused tokens ([@gossi](https://github.com/gossi))
+
+#### Committers: 1
+- Thomas Gossmann ([@gossi](https://github.com/gossi))
+
 ## Release (2025-12-11)
 
 * @hokulea/pahu 0.2.0 (minor)
