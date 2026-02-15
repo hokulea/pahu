@@ -1,31 +1,11 @@
 {
   "solution": {
     "@hokulea/pahu": {
-      "impact": "minor",
-      "oldVersion": "0.1.0",
-      "newVersion": "0.2.0",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        }
-      ],
-      "pkgJSONPath": "./packages/core/package.json"
+      "oldVersion": "0.2.0"
     },
     "@hokulea/ember-pahu": {
-      "impact": "patch",
-      "oldVersion": "0.0.2",
-      "newVersion": "0.0.3",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Has dependency `workspace:*` on @hokulea/pahu"
-        }
-      ],
-      "pkgJSONPath": "./packages/ember/package.json"
+      "oldVersion": "0.0.3"
     }
   },
-  "description": "## Release (2025-12-11)\n\n* @hokulea/pahu 0.2.0 (minor)\n* @hokulea/ember-pahu 0.0.3 (patch)\n\n#### :rocket: Enhancement\n* `@hokulea/pahu`\n  * [#19](https://github.com/hokulea/pahu/pull/19) Add validation to submission of a form ([@gossi](https://github.com/gossi))\n\n#### :house: Internal\n* [#21](https://github.com/hokulea/pahu/pull/21) Remove unused ENV var ([@gossi](https://github.com/gossi))\n\n#### Committers: 1\n- Thomas Gossmann ([@gossi](https://github.com/gossi))\n"
+  "description": "## Release (2026-02-15)\n\n\n\n#### :house: Internal\n* [#76](https://github.com/hokulea/pahu/pull/76) Remove unused tokens ([@gossi](https://github.com/gossi))\n\n#### Committers: 1\n- Thomas Gossmann ([@gossi](https://github.com/gossi))\n"
 }
