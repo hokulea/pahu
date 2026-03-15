@@ -307,8 +307,8 @@ importers:
         specifier: ^21.0.2
         version: 21.0.2
       testem:
-        specifier: ^3.17.0
-        version: 3.17.0(handlebars@4.7.8)(underscore@1.13.7)
+        specifier: ^3.18.0
+        version: 3.18.0(handlebars@4.7.8)(underscore@1.13.7)
       tsdown:
         specifier: ^0.21.3
         version: 0.21.3(synckit@0.11.11)(typescript@5.9.3)
@@ -5235,8 +5235,8 @@ packages:
     resolution: {integrity: sha512-u9E6A+ZDYdp7a4WnarkXPZOx8Ilz46+kby6p1yZ8zsGTz9gYa6FIS7lj2oezzNKmtdyyJNNmmXDppga5GB7kSw==}
     engines: {node: '>=18'}
 
-  testem@3.17.0:
-    resolution: {integrity: sha512-j91I0w9pCVg6P1NU95gUsAujd7RBuAZGcwqQiB0smmXFZvRLaFZ+yZoTE/qK/QRl/x6GBNckM+GDDU59KsHsJg==}
+  testem@3.18.0:
+    resolution: {integrity: sha512-HEj+HSms8aM4GLn2bEkcR4rVb3Fr0C34uEUATbhVr/UirZkXh+iv+TuA7IGLC4KVGmuYSA0SjAYckci82hShEQ==}
     engines: {node: '>= 7.*'}
     hasBin: true
 
@@ -5294,6 +5294,10 @@ packages:
   tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
     engines: {node: '>=0.6.0'}
+
+  tmp@0.2.5:
+    resolution: {integrity: sha512-voyz6MApa1rQGUxT3E+BK7/ROe8itEx7vD8/HEvt4xwXucvQ5G5oeEiHkmHZJuBO21RpOf+YYm9MOivj709jow==}
+    engines: {node: '>=14.14'}
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -11641,7 +11645,7 @@ snapshots:
       glob: 10.4.5
       minimatch: 10.2.2
 
-  testem@3.17.0(handlebars@4.7.8)(underscore@1.13.7):
+  testem@3.18.0(handlebars@4.7.8)(underscore@1.13.7):
     dependencies:
       '@xmldom/xmldom': 0.8.11
       backbone: 1.6.1
@@ -11667,7 +11671,7 @@ snapshots:
       spawn-args: 0.2.0
       styled_string: 0.0.1
       tap-parser: 7.0.0
-      tmp: 0.0.33
+      tmp: 0.2.5
     transitivePeerDependencies:
       - arc-templates
       - atpl
@@ -11770,6 +11774,8 @@ snapshots:
   tmp@0.0.33:
     dependencies:
       os-tmpdir: 1.0.2
+
+  tmp@0.2.5: {}
 
   to-regex-range@5.0.1:
     dependencies:
