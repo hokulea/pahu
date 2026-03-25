@@ -47,8 +47,11 @@ interface RegisterFieldSignature {
   };
 }
 
-export interface FieldAPI<DATA extends UserData, NAME extends string, VALUE>
-  extends UpstreamFieldAPI<DATA, NAME, VALUE> {
+export interface FieldAPI<
+  DATA extends UserData,
+  NAME extends string,
+  VALUE
+> extends UpstreamFieldAPI<DATA, NAME, VALUE> {
   value: Exclude<FieldValue<DATA, NAME, VALUE>, 'unknown'>;
   registerElement: FunctionBasedModifier<RegisterFieldSignature>;
 }
