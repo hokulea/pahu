@@ -114,8 +114,11 @@ export interface FieldConfig<DATA extends UserData, NAME extends string, VALUE> 
 //  & (NAME extends keyof DATA ? {} : { value?: FieldValue<DATA, NAME, VALUE> });
 
 /* Internal full config with the reference to the form */
-interface FullFieldConfig<DATA extends UserData, NAME extends string, VALUE>
-  extends FieldConfig<DATA, NAME, VALUE> {
+interface FullFieldConfig<DATA extends UserData, NAME extends string, VALUE> extends FieldConfig<
+  DATA,
+  NAME,
+  VALUE
+> {
   form: Form<DATA>;
 }
 
@@ -209,8 +212,7 @@ export class Field<
   DATA extends UserData,
   NAME extends string = FieldNames<DATA> | (string & {}),
   VALUE = NAME extends keyof DATA ? DATA[NAME] : UserValue
-> implements FieldAPI<DATA, NAME, VALUE>
-{
+> implements FieldAPI<DATA, NAME, VALUE> {
   #config!: InternalFieldConfig<DATA, NAME, VALUE>;
   #form: Form<DATA>;
   #elements = new Set<FieldElement>();
