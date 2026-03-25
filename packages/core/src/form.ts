@@ -447,10 +447,7 @@ export class Form<DATA extends UserData> implements FormAPI<DATA> {
   };
 
   validate = async (): Promise<ValidationResult<Record<string, unknown>>> => {
-    const issues: Issue[] = [];
-
-    issues.push(...this.#validateNativeOnUnregisteredFields());
-
+    const issues: Issue[] = this.#validateNativeOnUnregisteredFields();
     const data = { ...this.#getFormData(), ...this.#getFieldData() } as FormOutput<DATA>;
 
     if (isValidationSchema(this.#config.validate)) {
