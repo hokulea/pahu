@@ -1,5 +1,5 @@
-import { page, userEvent } from '@vitest/browser/context';
 import { describe, expect, test, vi } from 'vitest';
+import { page, userEvent } from 'vitest/browser';
 
 import { createForm } from '#src';
 
@@ -16,7 +16,7 @@ test('cannot add another field with an existing name', () => {
 
   form.createField({ name: 'givenName' });
 
-  expect(() => form.createField({ name: 'givenName' })).toThrowError(
+  expect(() => form.createField({ name: 'givenName' })).toThrow(
     `Cannot register Field. Field with name 'givenName' already exists`
   );
 });
@@ -58,7 +58,7 @@ test('field removal', async () => {
   await userEvent.fill(fieldElement, 'foo');
   await userEvent.tab(); // trigger the change event
 
-  await vi.waitUntil(() => expect(validationHandler).toBeCalled());
+  await vi.waitUntil(() => expect(validationHandler).toHaveBeenCalled());
 
   validationHandler.mockClear();
 
@@ -67,7 +67,7 @@ test('field removal', async () => {
   await userEvent.fill(fieldElement, 'bar');
   await userEvent.tab(); // trigger the change event
 
-  await vi.waitUntil(() => expect(validationHandler).not.toBeCalled());
+  await vi.waitUntil(() => expect(validationHandler).not.toHaveBeenCalled());
 });
 
 test('register multiple elements', async () => {
@@ -94,7 +94,7 @@ test('register multiple elements', async () => {
   await userEvent.fill(fieldElement, 'foo');
   await userEvent.tab(); // trigger the change event
 
-  await vi.waitUntil(() => expect(validationHandler).toBeCalled());
+  await vi.waitUntil(() => expect(validationHandler).toHaveBeenCalled());
 
   validationHandler.mockClear();
 
@@ -103,7 +103,7 @@ test('register multiple elements', async () => {
   await userEvent.fill(fieldElement, 'bar');
   await userEvent.tab(); // trigger the change event
 
-  await vi.waitUntil(() => expect(validationHandler).toBeCalled());
+  await vi.waitUntil(() => expect(validationHandler).toHaveBeenCalled());
 });
 
 describe('Linked fields', () => {
@@ -127,7 +127,7 @@ describe('Linked fields', () => {
     password.setValue('test1234');
 
     await vi.waitFor(() =>
-      expect(validationHandler).toBeCalledWith('link', {
+      expect(validationHandler).toHaveBeenCalledWith('link', {
         success: false,
         value: 'test123',
         issues: [
@@ -162,7 +162,7 @@ describe('Linked fields', () => {
     email.setValue('test1234');
 
     await vi.waitFor(() =>
-      expect(validationHandler).toBeCalledWith('link', {
+      expect(validationHandler).toHaveBeenCalledWith('link', {
         success: false,
         value: 'test123',
         issues: [

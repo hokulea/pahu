@@ -27,8 +27,6 @@
     "strictPropertyInitialization": true,
     "skipLibCheck": true,
     "types": [
-      "@vitest/browser/matchers",
-      "@vitest/browser/providers/playwright",
       "vitest-browser-html"
     ],
     "paths": {

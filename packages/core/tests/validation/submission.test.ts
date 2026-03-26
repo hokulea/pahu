@@ -37,8 +37,8 @@ test('submit: success', async () => {
   await form.submit();
 
   expect(form.invalid).toBeFalsy();
-  expect(submitHandler).toBeCalledWith({ email: 'localhost@domain' });
-  expect(validatedHandler).not.toBeCalled();
+  expect(submitHandler).toHaveBeenCalledWith({ email: 'localhost@domain' });
+  expect(validatedHandler).not.toHaveBeenCalled();
 });
 
 test('submit: fail', async () => {
@@ -73,8 +73,8 @@ test('submit: fail', async () => {
   await form.submit();
 
   expect(form.invalid).toBeTruthy();
-  expect(submitHandler).not.toBeCalled();
-  expect(validatedHandler).toBeCalledWith('submit', {
+  expect(submitHandler).not.toHaveBeenCalled();
+  expect(validatedHandler).toHaveBeenCalledWith('submit', {
     success: false,
     value: { email: undefined },
     issues: [

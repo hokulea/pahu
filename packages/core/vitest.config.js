@@ -1,3 +1,4 @@
+import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
@@ -8,6 +9,7 @@ export default defineConfig({
     setupFiles: ['vitest-browser-html', './tests/-setup.ts'],
     coverage: {
       enabled: true,
+      include: ['src/**/*.ts'],
       provider: 'istanbul',
       reporter: ['text', 'html', ['lcov', { projectRoot: '../../' }], 'json']
     },
@@ -15,7 +17,7 @@ export default defineConfig({
       enabled: true,
       headless: true,
       screenshotFailures: false,
-      provider: 'playwright',
+      provider: playwright(),
       testerHtmlPath: 'tests/index.html',
       instances: [
         // { browser: 'firefox' }
