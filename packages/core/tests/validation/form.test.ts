@@ -1,6 +1,6 @@
-import { page } from '@vitest/browser/context';
 import * as v from 'valibot';
 import { describe, expect, test } from 'vitest';
+import { page } from 'vitest/browser';
 
 import { createForm } from '#src';
 
@@ -270,6 +270,4 @@ test('Form + native field + custom field validation', async () => {
     value: formData.givenName,
     message: 'Foo is an invalid given name!'
   });
-
-  console.log(result);
 });

@@ -1,6 +1,6 @@
-import { page, userEvent } from '@vitest/browser/context';
 import * as v from 'valibot';
 import { expect, test, vi } from 'vitest';
+import { page, userEvent } from 'vitest/browser';
 
 import { createForm } from '#src';
 
@@ -101,7 +101,7 @@ test('validation and revalidation', async () => {
 
   await vi.waitUntil(() => expect(email.validated).toBeTruthy());
   await vi.waitUntil(() =>
-    expect(validationHandler).toBeCalledWith('change', {
+    expect(validationHandler).toHaveBeenCalledWith('change', {
       success: false,
       value: undefined,
       issues: [
@@ -117,7 +117,7 @@ test('validation and revalidation', async () => {
   await userEvent.tab(); // trigger the change event
 
   await vi.waitUntil(() =>
-    expect(validationHandler).toBeCalledWith('change', {
+    expect(validationHandler).toHaveBeenCalledWith('change', {
       success: false,
       value: undefined,
       issues: [

@@ -1,5 +1,5 @@
-import { page } from '@vitest/browser/context';
 import { describe, expect, test, vi } from 'vitest';
+import { page } from 'vitest/browser';
 
 import { createForm, type SubmitHandler } from '#src';
 
@@ -71,7 +71,7 @@ describe('Submission', () => {
     formElement.dispatchEvent(new SubmitEvent('submit'));
 
     await vi.waitFor(() => {
-      expect(validationHandler).toBeCalledTimes(1);
+      expect(validationHandler).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -94,7 +94,7 @@ describe('Submission', () => {
     formElement.dispatchEvent(new SubmitEvent('submit'));
 
     await vi.waitFor(() => {
-      expect(submitHandler).toBeCalledTimes(1);
+      expect(submitHandler).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -116,7 +116,7 @@ describe('Submission', () => {
 
     await form.submit();
 
-    expect(submitHandler).toBeCalledWith(formData);
+    expect(submitHandler).toHaveBeenCalledWith(formData);
   });
 
   test('submit handler validation', async () => {

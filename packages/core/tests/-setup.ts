@@ -1,4 +1,4 @@
-import { locators } from '@vitest/browser/context';
+import { type Locator, locators } from 'vitest/browser';
 
 locators.extend({
   q(selector: string) {
@@ -6,7 +6,7 @@ locators.extend({
   }
 });
 
-declare module '@vitest/browser/context' {
+declare module 'vitest/browser' {
   interface LocatorSelectors {
     // if the custom method returns a string, it will be converted into a locator
     // if it returns anything else, then it will be returned as usual
