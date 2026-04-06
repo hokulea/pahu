@@ -18,7 +18,7 @@
     "@glint/ember-tsc": "^1.4.0",
     "playwright": "^1.58.2",
     "release-plan": "^0.17.4",
-    "turbo": "^2.8.21"
+    "turbo": "^2.9.4"
   },
   "packageManager": "pnpm@10.33.0"
 }
