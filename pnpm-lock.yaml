@@ -259,8 +259,8 @@ importers:
         specifier: ^2.19.13
         version: 2.19.13
       '@types/sinon':
-        specifier: ^21.0.0
-        version: 21.0.0
+        specifier: ^21.0.1
+        version: 21.0.1
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.0
         version: 4.0.0
@@ -1897,8 +1897,8 @@ packages:
   '@types/rimraf@2.0.5':
     resolution: {integrity: sha512-YyP+VfeaqAyFmXoTh3HChxOQMyjByRMsHU7kc5KOJkSlXudhMhQIALbYV7rHh/l8d2lX3VUQzprrcAgWdRuU8g==}
 
-  '@types/sinon@21.0.0':
-    resolution: {integrity: sha512-+oHKZ0lTI+WVLxx1IbJDNmReQaIsQJjN2e7UUrJHEeByG7bFeKJYsv1E75JxTQ9QKJDp21bAa/0W2Xo4srsDnw==}
+  '@types/sinon@21.0.1':
+    resolution: {integrity: sha512-5yoJSqLbjH8T9V2bksgRayuhpZy+723/z6wBOR+Soe4ZlXC0eW8Na71TeaZPUWDQvM7LYKa9UGFc6LRqxiR5fQ==}
 
   '@types/sinonjs__fake-timers@8.1.5':
     resolution: {integrity: sha512-mQkU2jY8jJEF7YHjHvsQO8+3ughTL1mcnn96igfhONmR+fUPSKIkefQYpSe8bsly2Ep7oQbn/6VG5/9/0qcArQ==}
@@ -7721,7 +7721,7 @@ snapshots:
       '@types/glob': 9.0.0
       '@types/node': 24.3.0
 
-  '@types/sinon@21.0.0':
+  '@types/sinon@21.0.1':
     dependencies:
       '@types/sinonjs__fake-timers': 8.1.5
 
