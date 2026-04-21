@@ -80,7 +80,7 @@
     "eslint-plugin-qunit": "^8.2.6",
     "prettier": "^3.8.3",
     "qunit": "^2.25.0",
-    "qunit-dom": "^3.5.0",
+    "qunit-dom": "^3.5.1",
     "sinon": "^21.1.2",
     "testem": "^3.20.0",
     "tsdown": "^0.21.7",
