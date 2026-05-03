@@ -226,8 +226,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@ember/test-helpers':
-        specifier: ^5.4.1
-        version: 5.4.1(@babel/core@7.29.0)(@glint/template@1.7.7)
+        specifier: ^5.4.2
+        version: 5.4.2(@babel/core@7.29.0)(@glint/template@1.7.7)
       '@embroider/core':
         specifier: ^4.4.7
         version: 4.4.7(@glint/template@1.7.7)
@@ -272,7 +272,7 @@ importers:
         version: 9.0.0
       ember-qunit:
         specifier: ^9.0.4
-        version: 9.0.4(@ember/test-helpers@5.4.1(@babel/core@7.29.0)(@glint/template@1.7.7))(@glint/template@1.7.7)(qunit@2.25.0)
+        version: 9.0.4(@ember/test-helpers@5.4.2(@babel/core@7.29.0)(@glint/template@1.7.7))(@glint/template@1.7.7)(qunit@2.25.0)
       ember-source:
         specifier: ~6.12.0
         version: 6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
@@ -954,8 +954,8 @@ packages:
   '@ember/edition-utils@1.2.0':
     resolution: {integrity: sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==}
 
-  '@ember/test-helpers@5.4.1':
-    resolution: {integrity: sha512-BUdT91ra+QibEWAUwtZmvTGFoDHJCxDU+fkQENA8Zs0FR3pZiICxxP/fgdlNExCjjdm1letut7ENoueBuDdixQ==}
+  '@ember/test-helpers@5.4.2':
+    resolution: {integrity: sha512-ZT++x8DbixXgvxO00J064rzNcsn9WycMPisNvee6dg9u6G4Z1yx0Hc8HqUFBJP7NyxVKZCokHlRWRQuz9S6wvQ==}
 
   '@ember/test-waiters@4.1.1':
     resolution: {integrity: sha512-HbK70JYCDJcGI0CrwcbjeL2QHAn0HLwa3oGep7mr6l/yO95U7JYA8VN+/9VTsWJTmKueLtWayUqEmGS3a3mVOg==}
@@ -6838,7 +6838,7 @@ snapshots:
 
   '@ember/edition-utils@1.2.0': {}
 
-  '@ember/test-helpers@5.4.1(@babel/core@7.29.0)(@glint/template@1.7.7)':
+  '@ember/test-helpers@5.4.2(@babel/core@7.29.0)(@glint/template@1.7.7)':
     dependencies:
       '@ember/test-waiters': 4.1.1(@glint/template@1.7.7)
       '@embroider/addon-shim': 1.10.2
@@ -9476,9 +9476,9 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  ember-qunit@9.0.4(@ember/test-helpers@5.4.1(@babel/core@7.29.0)(@glint/template@1.7.7))(@glint/template@1.7.7)(qunit@2.25.0):
+  ember-qunit@9.0.4(@ember/test-helpers@5.4.2(@babel/core@7.29.0)(@glint/template@1.7.7))(@glint/template@1.7.7)(qunit@2.25.0):
     dependencies:
-      '@ember/test-helpers': 5.4.1(@babel/core@7.29.0)(@glint/template@1.7.7)
+      '@ember/test-helpers': 5.4.2(@babel/core@7.29.0)(@glint/template@1.7.7)
       '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.20.2(@glint/template@1.7.7)
       qunit: 2.25.0
