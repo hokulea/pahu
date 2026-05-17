@@ -65,7 +65,7 @@
     "@gossi/config-prettier": "^1.2.1",
     "@gossi/config-template-lint": "^1.2.2",
     "@rollup/plugin-babel": "^7.0.0",
-    "@types/qunit": "^2.19.13",
+    "@types/qunit": "^2.19.14",
     "@types/sinon": "^21.0.1",
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "decorator-transforms": "^2.3.2",
