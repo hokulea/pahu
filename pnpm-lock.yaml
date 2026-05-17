@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@glint/ember-tsc':
-        specifier: ^1.5.0
-        version: 1.5.0(typescript@6.0.3)
+        specifier: ^1.7.1
+        version: 1.7.1(ember-source@6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@6.0.3)
       playwright:
         specifier: ^1.59.1
         version: 1.59.1
@@ -50,7 +50,7 @@ importers:
         version: 1.7.2(@embroider/core@4.4.7(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.32.0)(terser@5.43.1)(yaml@2.8.3))
       '@glint/ember-tsc':
         specifier: ^1.0.3
-        version: 1.5.0(typescript@5.9.3)
+        version: 1.7.1(ember-source@6.5.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
       '@glint/template':
         specifier: ^1.6.1
         version: 1.7.7
@@ -238,8 +238,8 @@ importers:
         specifier: ^1.7.2
         version: 1.7.2(@embroider/core@4.4.7(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@8.0.11(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.3))
       '@glint/ember-tsc':
-        specifier: ^1.5.0
-        version: 1.5.0(typescript@5.9.3)
+        specifier: ^1.7.1
+        version: 1.7.1(ember-source@6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
       '@glint/template':
         specifier: ^1.7.7
         version: 1.7.7
@@ -1292,11 +1292,15 @@ packages:
   '@glimmer/wire-format@0.94.8':
     resolution: {integrity: sha512-A+Cp5m6vZMAEu0Kg/YwU2dJZXyYxVJs2zI57d3CP6NctmX7FsT8WjViiRUmt5abVmMmRH5b8BUovqY6GSMAdrw==}
 
-  '@glint/ember-tsc@1.5.0':
-    resolution: {integrity: sha512-mMAG91QyzKQvklnoQFy5orNA4gYU2LPQlPHUbJnuAHJ0c5pwyUO/rjseudFXAWRA5F8cQmNLqtximnLTvHSMzw==}
+  '@glint/ember-tsc@1.7.1':
+    resolution: {integrity: sha512-85SqNlV7KhWGzWmhcOEn0sma77bwQJRj1GzrdAm8LSXLUTT3Htay0GdNh6bshwuY4/VHd/fbAgIONq7HdwZ97g==}
     hasBin: true
     peerDependencies:
+      ember-source: '>=3.28.0'
       typescript: '>=5.6.0'
+    peerDependenciesMeta:
+      ember-source:
+        optional: true
 
   '@glint/template@1.7.7':
     resolution: {integrity: sha512-jcPdQ3A6cXo5h9RBi0tK4/o5qNn7868Y8xpkwWQNPAd8xQKuRKmG9dGJwUycXvtqISzfrnL1p3MQr3hYN/Ua6Q==}
@@ -3129,8 +3133,8 @@ packages:
   content-tag@3.1.3:
     resolution: {integrity: sha512-4Kiv9mEroxuMXfWUNUHcljVJgxThCNk7eEswdHMXdzJnkBBaYDqDwzHkoh3F74JJhfU3taJOsgpR6oEGIDg17g==}
 
-  content-tag@4.1.1:
-    resolution: {integrity: sha512-LyIbq4ZY+WbN0NoyHmg0w1kLPHyXZkZZrTDJZm/HW+MVurnKJy7U3m8WlpKm6lqbYbUSWP6ATNacE5dL2eH8+g==}
+  content-tag@4.2.0:
+    resolution: {integrity: sha512-f/o+F3qSa4gg23I7RWy6cMDxP2nPo99YWusxw2bjne7ZC6Acqqf4uB/+87AekOq1ehTocHH7b7nMd2X4S3NHVw==}
 
   content-type@1.0.5:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
@@ -7177,7 +7181,7 @@ snapshots:
       browserslist: 4.28.1
       browserslist-to-esbuild: 2.1.1(browserslist@4.28.1)
       chalk: 5.6.2
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       debug: 4.4.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
@@ -7203,7 +7207,7 @@ snapshots:
       browserslist: 4.28.1
       browserslist-to-esbuild: 2.1.1(browserslist@4.28.1)
       chalk: 5.6.2
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       debug: 4.4.3
       fast-glob: 3.3.3
       fs-extra: 10.1.0
@@ -7526,7 +7530,7 @@ snapshots:
     dependencies:
       '@glimmer/interfaces': 0.94.6
 
-  '@glint/ember-tsc@1.5.0(typescript@5.9.3)':
+  '@glint/ember-tsc@1.7.1(ember-source@6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)':
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@glint/template': 1.7.7
@@ -7537,7 +7541,7 @@ snapshots:
       '@volar/source-map': 2.4.28
       '@volar/test-utils': 2.4.28
       '@volar/typescript': 2.4.28
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       silent-error: 1.1.1
       typescript: 5.9.3
       volar-service-html: 0.0.68(@volar/language-service@2.4.28)
@@ -7545,10 +7549,12 @@ snapshots:
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
+    optionalDependencies:
+      ember-source: 6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/ember-tsc@1.5.0(typescript@6.0.3)':
+  '@glint/ember-tsc@1.7.1(ember-source@6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@6.0.3)':
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@glint/template': 1.7.7
@@ -7559,7 +7565,7 @@ snapshots:
       '@volar/source-map': 2.4.28
       '@volar/test-utils': 2.4.28
       '@volar/typescript': 2.4.28
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       silent-error: 1.1.1
       typescript: 6.0.3
       volar-service-html: 0.0.68(@volar/language-service@2.4.28)
@@ -7567,6 +7573,32 @@ snapshots:
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
+    optionalDependencies:
+      ember-source: 6.12.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@glint/ember-tsc@1.7.1(ember-source@6.5.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)':
+    dependencies:
+      '@glimmer/syntax': 0.95.0
+      '@glint/template': 1.7.7
+      '@volar/kit': 2.4.28(typescript@5.9.3)
+      '@volar/language-core': 2.4.28
+      '@volar/language-server': 2.4.28
+      '@volar/language-service': 2.4.28
+      '@volar/source-map': 2.4.28
+      '@volar/test-utils': 2.4.28
+      '@volar/typescript': 2.4.28
+      content-tag: 4.2.0
+      silent-error: 1.1.1
+      typescript: 5.9.3
+      volar-service-html: 0.0.68(@volar/language-service@2.4.28)
+      volar-service-typescript: 0.0.68(@volar/language-service@2.4.28)
+      vscode-languageserver-protocol: 3.17.5
+      vscode-languageserver-textdocument: 1.0.12
+      vscode-uri: 3.1.0
+    optionalDependencies:
+      ember-source: 6.5.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -9483,7 +9515,7 @@ snapshots:
 
   content-tag@3.1.3: {}
 
-  content-tag@4.1.1: {}
+  content-tag@4.2.0: {}
 
   content-type@1.0.5: {}
 
@@ -9724,7 +9756,7 @@ snapshots:
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@typescript-eslint/tsconfig-utils': 8.58.1(typescript@5.9.3)
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       ember-estree: 0.6.3(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
       eslint-scope: 9.1.2
       html-tags: 5.1.0
@@ -9795,7 +9827,7 @@ snapshots:
     dependencies:
       '@glimmer/env': 0.1.7
       '@glimmer/syntax': 0.95.0
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       oxc-parser: 0.119.0(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
     transitivePeerDependencies:
       - '@emnapi/core'
@@ -9937,7 +9969,7 @@ snapshots:
   ember-template-imports@4.4.0:
     dependencies:
       broccoli-stew: 3.0.0
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       ember-cli-version-checker: 5.1.2
     transitivePeerDependencies:
       - supports-color
@@ -11919,7 +11951,7 @@ snapshots:
   prettier-plugin-ember-template-tag@2.1.3(prettier@3.8.3):
     dependencies:
       '@babel/traverse': 7.29.0
-      content-tag: 4.1.1
+      content-tag: 4.2.0
       prettier: 3.8.3
     transitivePeerDependencies:
       - supports-color
