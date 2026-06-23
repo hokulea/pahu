@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@glint/ember-tsc':
         specifier: ^1.8.0
-        version: 1.8.0(ember-source@7.0.0(@glimmer/component@2.0.0))(typescript@6.0.3)
+        version: 1.8.0(ember-source@7.1.0(@glimmer/component@2.0.0))(typescript@6.0.3)
       playwright:
         specifier: ^1.60.0
         version: 1.60.0
@@ -47,7 +47,7 @@ importers:
         version: 1.20.4(@babel/core@7.29.7)(@glint/template@1.7.7)
       '@embroider/vite':
         specifier: ^1.1.6
-        version: 1.7.6(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.32.0)(terser@5.43.1)(yaml@2.8.3))
+        version: 1.7.7(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.32.0)(terser@5.43.1)(yaml@2.8.3))
       '@glint/ember-tsc':
         specifier: ^1.0.3
         version: 1.8.0(ember-source@6.5.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
@@ -235,11 +235,11 @@ importers:
         specifier: ^1.20.4
         version: 1.20.4(@babel/core@7.29.7)(@glint/template@1.7.7)
       '@embroider/vite':
-        specifier: ^1.7.6
-        version: 1.7.6(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@8.0.16(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.3))
+        specifier: ^1.7.7
+        version: 1.7.7(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@8.0.16(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.3))
       '@glint/ember-tsc':
         specifier: ^1.8.0
-        version: 1.8.0(ember-source@7.0.0(@glimmer/component@2.0.0))(typescript@5.9.3)
+        version: 1.8.0(ember-source@7.1.0(@glimmer/component@2.0.0))(typescript@5.9.3)
       '@glint/template':
         specifier: ^1.7.7
         version: 1.7.7
@@ -274,8 +274,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(@ember/test-helpers@5.4.3(@babel/core@7.29.7)(@glint/template@1.7.7))(qunit@2.26.0)
       ember-source:
-        specifier: ~7.0.0
-        version: 7.0.0(@glimmer/component@2.0.0)
+        specifier: ~7.1.0
+        version: 7.1.0(@glimmer/component@2.0.0)
       ember-strict-application-resolver:
         specifier: ^0.1.1
         version: 0.1.1(@babel/core@7.29.7)
@@ -954,8 +954,8 @@ packages:
     resolution: {integrity: sha512-IlxD8okTt9cRUFpJKD8gTuQUBuEflrhCUju1xZFdYvmGm5XVqHPfG4I6+bEdKb8NO92aqHxr9SYuYibDmpMM9w==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/vite@1.7.6':
-    resolution: {integrity: sha512-aJSV3BtFdkxmjH20jZsbXV0O69JQQopH46xQI0HTsKJNoWa5Dy59stF0y91/b6fPqKyUyXvafi7oiYa+khExMg==}
+  '@embroider/vite@1.7.7':
+    resolution: {integrity: sha512-tduTHBoIls84HiAwZ7H8GtAuPzzzKbX3bvHtepr16N/T+/dMqwtkqLG/JQUclXsilKTdap/2RzNLhdVj55UiQw==}
     peerDependencies:
       '@embroider/core': ^4.6.1
       vite: '>= 5.2.0'
@@ -3332,8 +3332,8 @@ packages:
     peerDependencies:
       '@glimmer/component': '>= 1.1.2'
 
-  ember-source@7.0.0:
-    resolution: {integrity: sha512-30dv3f4jMKAFhUmyjbb5V8B+hhkhwn2Y+GbwIxbb4SuEXtJf0uPr1Ppp1g5s6LzrxU5zPlCXh2bfN3LCwqqGog==}
+  ember-source@7.1.0:
+    resolution: {integrity: sha512-qOHhTiVMeYcNp2UQKuAqsf33LKgNtzqvw46dQX5AqutTfXXPn4KYR0+aiGQdJaCuzs81nFvvTDJuHzELOZ5UBg==}
     engines: {node: '>= 20.19'}
     peerDependencies:
       '@glimmer/component': '>= 1.1.2'
@@ -6989,7 +6989,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/vite@1.7.6(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.32.0)(terser@5.43.1)(yaml@2.8.3))':
+  '@embroider/vite@1.7.7(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.32.0)(terser@5.43.1)(yaml@2.8.3))':
     dependencies:
       '@babel/core': 7.29.7
       '@embroider/core': 4.6.1(@glint/template@1.7.7)
@@ -7015,7 +7015,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/vite@1.7.6(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@8.0.16(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.3))':
+  '@embroider/vite@1.7.7(@embroider/core@4.6.1(@glint/template@1.7.7))(@glint/template@1.7.7)(vite@8.0.16(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.3))':
     dependencies:
       '@babel/core': 7.29.7
       '@embroider/core': 4.6.1(@glint/template@1.7.7)
@@ -7388,7 +7388,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/ember-tsc@1.8.0(ember-source@7.0.0(@glimmer/component@2.0.0))(typescript@5.9.3)':
+  '@glint/ember-tsc@1.8.0(ember-source@7.1.0(@glimmer/component@2.0.0))(typescript@5.9.3)':
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@glint/template': 1.7.7
@@ -7408,11 +7408,11 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
     optionalDependencies:
-      ember-source: 7.0.0(@glimmer/component@2.0.0)
+      ember-source: 7.1.0(@glimmer/component@2.0.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/ember-tsc@1.8.0(ember-source@7.0.0(@glimmer/component@2.0.0))(typescript@6.0.3)':
+  '@glint/ember-tsc@1.8.0(ember-source@7.1.0(@glimmer/component@2.0.0))(typescript@6.0.3)':
     dependencies:
       '@glimmer/syntax': 0.95.0
       '@glint/template': 1.7.7
@@ -7432,7 +7432,7 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
     optionalDependencies:
-      ember-source: 7.0.0(@glimmer/component@2.0.0)
+      ember-source: 7.1.0(@glimmer/component@2.0.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -9671,7 +9671,7 @@ snapshots:
       - rsvp
       - supports-color
 
-  ember-source@7.0.0(@glimmer/component@2.0.0):
+  ember-source@7.1.0(@glimmer/component@2.0.0):
     dependencies:
       '@babel/core': 7.29.7
       '@embroider/addon-shim': 1.10.2
