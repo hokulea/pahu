@@ -12,7 +12,7 @@ importers:
         specifier: ^1.8.4
         version: 1.8.11(ember-source@7.1.0(@glimmer/component@2.0.0))(typescript@6.0.3)
       playwright:
-        specifier: ^1.61.0
+        specifier: ^1.61.1
         version: 1.61.1
       release-plan:
         specifier: ^0.18.0
@@ -171,7 +171,7 @@ importers:
         specifier: ^10.5.0
         version: 10.5.0(jiti@2.5.1)
       playwright:
-        specifier: ^1.61.0
+        specifier: ^1.61.1
         version: 1.61.1
       prettier:
         specifier: ^3.8.4
