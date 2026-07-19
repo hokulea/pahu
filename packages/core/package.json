@@ -65,7 +65,7 @@
     "release-plan": "^0.18.0",
     "tsdown": "^0.22.5",
     "type-fest": "^5.8.0",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "valibot": "^1.4.2",
     "vite": "^8.1.4",
     "vitest": "4.1.10",
