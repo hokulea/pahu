@@ -69,7 +69,7 @@
     "@types/sinon": "^22.0.0",
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "decorator-transforms": "^2.4.0",
-    "dot-prop": "^9.0.0",
+    "dot-prop": "^10.1.0",
     "ember-qunit": "^9.1.0",
     "ember-source": "~7.1.0",
     "ember-strict-application-resolver": "^0.1.1",
