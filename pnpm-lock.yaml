@@ -18,7 +18,7 @@ importers:
         specifier: ^0.18.0
         version: 0.18.0
       turbo:
-        specifier: ^2.10.4
+        specifier: ^2.10.5
         version: 2.10.5
 
   examples/ember:
