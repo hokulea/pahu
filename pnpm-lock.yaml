@@ -180,7 +180,7 @@ importers:
         specifier: ^0.18.0
         version: 0.18.0
       tsdown:
-        specifier: ^0.22.12
+        specifier: ^0.22.14
         version: 0.22.14(@volar/typescript@2.4.28)(typescript@5.9.3)(unrun@0.2.37(synckit@0.11.11))
       type-fest:
         specifier: ^5.8.0
@@ -310,7 +310,7 @@ importers:
         specifier: ^3.20.1
         version: 3.20.1(@babel/core@8.0.1)(handlebars@4.7.8)(underscore@1.13.7)
       tsdown:
-        specifier: ^0.22.12
+        specifier: ^0.22.14
         version: 0.22.14(@volar/typescript@2.4.28)(typescript@5.9.3)(unrun@0.2.37(synckit@0.11.11))
       typescript:
         specifier: ^5.9.3
