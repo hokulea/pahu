@@ -84,7 +84,7 @@
     "sinon": "^22.1.0",
     "testem": "^3.20.1",
     "tsdown": "^0.22.14",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "vite": "^8.2.1"
   },
   "engines": {
