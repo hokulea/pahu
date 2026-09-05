@@ -15,7 +15,7 @@
     "test": "pnpm run -r --parallel  --aggregate-output test"
   },
   "devDependencies": {
-    "@glint/ember-tsc": "^1.10.0",
+    "@glint/ember-tsc": "^1.11.2",
     "playwright": "^1.62.1",
     "release-plan": "^0.20.0",
     "turbo": "^2.10.11"
