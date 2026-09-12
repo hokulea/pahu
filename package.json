@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@glint/ember-tsc": "^1.11.4",
-    "playwright": "^1.62.1",
+    "playwright": "^1.63.0",
     "release-plan": "^0.20.0",
     "turbo": "^2.10.12"
   },
