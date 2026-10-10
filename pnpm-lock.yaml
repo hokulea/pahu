@@ -15,8 +15,8 @@ importers:
         specifier: ^1.63.0
         version: 1.63.0
       release-plan:
-        specifier: ^0.20.0
-        version: 0.20.0
+        specifier: ^0.20.1
+        version: 0.20.1
       turbo:
         specifier: ^2.10.12
         version: 2.10.12
@@ -177,8 +177,8 @@ importers:
         specifier: ^3.8.4
         version: 3.8.4
       release-plan:
-        specifier: ^0.20.0
-        version: 0.20.0
+        specifier: ^0.20.1
+        version: 0.20.1
       tsdown:
         specifier: ^0.23.0
         version: 0.23.0(@volar/typescript@2.4.28)(typescript@5.9.3)(unrun@0.2.37(synckit@0.11.11))
@@ -5236,8 +5236,8 @@ packages:
     resolution: {integrity: sha512-NZQZdC5wOE/H3UT28fVGL+ikOZcEzfMGk/c3iN9UGxzWHMa1op7274oyiUVrAG4B2EuFhus8SvkaYnhvW92p9Q==}
     hasBin: true
 
-  release-plan@0.20.0:
-    resolution: {integrity: sha512-BeFOBspvKTS4Sxq0/OnAS2aZ2pOWxiu19vkobGJtM8rDN9m/WM1IVvzRYbGloQTFwbyUxedd6+PgI7Cc/dPGQg==}
+  release-plan@0.20.1:
+    resolution: {integrity: sha512-KUKsRfekPJL+A80dLXp1+BtMurM7e75uhLa2LHaTgrJuXxyPujVPt8Xd3es2I2K6WeNz7YSkv3mZDX6ComPdsw==}
     engines: {node: 22.* || 24.* || >= 26}
     hasBin: true
 
@@ -12739,7 +12739,7 @@ snapshots:
     dependencies:
       jsesc: 3.1.0
 
-  release-plan@0.20.0:
+  release-plan@0.20.1:
     dependencies:
       '@manypkg/get-packages': 3.1.0
       '@npmcli/package-json': 8.0.0
