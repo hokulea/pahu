@@ -307,8 +307,8 @@ importers:
         specifier: ^22.1.0
         version: 22.1.0
       testem:
-        specifier: ^3.21.0
-        version: 3.21.0(@babel/core@8.0.6)(handlebars@4.7.8)(underscore@1.13.7)
+        specifier: ^3.21.3
+        version: 3.21.3(@babel/core@8.0.6)(handlebars@4.7.8)(underscore@1.13.7)
       tsdown:
         specifier: ^0.23.0
         version: 0.23.0(@volar/typescript@2.4.28)(typescript@5.9.3)(unrun@0.2.37(synckit@0.11.11))
@@ -5637,8 +5637,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  testem@3.21.0:
-    resolution: {integrity: sha512-7DLAgvhK0qRfr7mFVD69o3Z2Jb8GDAJ9LfCre7jJJqsa88SDqE2M686SXTQHIpRFUEYi2RrXSu5414kSjX50uw==}
+  testem@3.21.3:
+    resolution: {integrity: sha512-vZTaZajvrWjRnImBGGrkdFlGNqM9Llg9xdvYL7Yrb2BSzIjlZjV+7pc3FJTgagNgJaNsatp4s/Wtam5MSQrFvg==}
     engines: {node: ^20.19.0 || ^22.12.0 || ^24.0.0 || >= 26.0.0}
     hasBin: true
 
@@ -13222,7 +13222,7 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  testem@3.21.0(@babel/core@8.0.6)(handlebars@4.7.8)(underscore@1.13.7):
+  testem@3.21.3(@babel/core@8.0.6)(handlebars@4.7.8)(underscore@1.13.7):
     dependencies:
       '@xmldom/xmldom': 0.9.9
       backbone: 1.6.1
