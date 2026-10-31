@@ -259,7 +259,7 @@ importers:
         specifier: ^2.19.14
         version: 2.19.14
       '@types/sinon':
-        specifier: ^22.0.1
+        specifier: ^22.0.2
         version: 22.0.2
       babel-plugin-ember-template-compilation:
         specifier: ^4.0.1
