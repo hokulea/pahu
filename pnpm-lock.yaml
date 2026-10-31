@@ -41,13 +41,13 @@ importers:
         version: 1.0.3
       '@embroider/core':
         specifier: ^4.1.3
-        version: 4.6.9(@glint/template@1.9.0)
+        version: 4.6.10(@glint/template@1.9.0)
       '@embroider/macros':
         specifier: ^1.18.1
-        version: 1.21.3(@babel/core@7.29.7)(@glint/template@1.9.0)
+        version: 1.21.4(@babel/core@7.29.7)(@glint/template@1.9.0)
       '@embroider/vite':
         specifier: ^1.1.6
-        version: 1.7.15(@babel/core@7.29.7)(@embroider/core@4.6.9(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.33.0)(terser@5.43.1)(yaml@2.9.0))
+        version: 1.8.0(@babel/core@7.29.7)(@embroider/core@4.6.10(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.33.0)(terser@5.43.1)(yaml@2.9.0))
       '@glint/ember-tsc':
         specifier: ^1.0.3
         version: 1.11.6(ember-source@6.5.0(@glimmer/component@2.0.0)(rsvp@4.8.5))(typescript@5.9.3)
@@ -229,14 +229,14 @@ importers:
         specifier: ^5.4.3
         version: 5.4.3(@babel/core@8.0.10)(@glint/template@1.9.0)
       '@embroider/core':
-        specifier: ^4.6.9
-        version: 4.6.9(@glint/template@1.9.0)
+        specifier: ^4.6.10
+        version: 4.6.10(@glint/template@1.9.0)
       '@embroider/macros':
-        specifier: ^1.21.3
-        version: 1.21.3(@babel/core@8.0.10)(@glint/template@1.9.0)
+        specifier: ^1.21.4
+        version: 1.21.4(@babel/core@8.0.10)(@glint/template@1.9.0)
       '@embroider/vite':
-        specifier: ^1.7.15
-        version: 1.7.15(@babel/core@8.0.10)(@embroider/core@4.6.9(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@8.3.5(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.9.0))
+        specifier: ^1.8.0
+        version: 1.8.0(@babel/core@8.0.10)(@embroider/core@4.6.10(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@8.3.5(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.9.0))
       '@glint/ember-tsc':
         specifier: ^1.11.6
         version: 1.11.6(ember-source@7.3.1(@glimmer/component@2.0.0))(typescript@5.9.3)
@@ -1025,12 +1025,12 @@ packages:
     resolution: {integrity: sha512-EfI9cJ5/3QSUJtwm7x1MXrx3TEa2p7RNgSHefy7fvGm8/DP1xUFL25nST1NaHbHcqR1UhMlrTtv5iUIDoVzeQQ==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/core@4.6.9':
-    resolution: {integrity: sha512-mI5yjBkKrJI7BzLW/si13ORIzDXJvxpGlm7NhAH6Fs2/TgJCDI+tF9X5lj9Ib0a1Lgj31glOVo5wmjT/HXzYRQ==}
+  '@embroider/core@4.6.10':
+    resolution: {integrity: sha512-brgR9HIswY924zzFpORWd+g97tk8XFvILd3pf0GniVMBmoblsPRvlGG2K+yDAHMQm3ike1alrhUQTwoWrx/+RA==}
     engines: {node: '>= 20.19.*'}
 
-  '@embroider/macros@1.21.3':
-    resolution: {integrity: sha512-2o5GOa95FeETwNa7hO5q87tXPiExJHeJA4x8kFGn/feOpyjphqWMo19McNZxF+RUVnFSwHgPlA7LObU/aT4htQ==}
+  '@embroider/macros@1.21.4':
+    resolution: {integrity: sha512-5fPpOtQyQCK9RsMdtXZliUPKWAkdzJ8jCWIQotq9ZaeLMsvT4OkMBaSiZz5uED8GwDRmOXsJt2Ub3Zq6WtKqcw==}
     engines: {node: 12.* || 14.* || >= 16}
     peerDependencies:
       '@glint/template': ^1.0.0
@@ -1042,15 +1042,15 @@ packages:
     resolution: {integrity: sha512-WFsw8nQpHZiWGEDYpa/A79KEFfTisqteXbY+jg9eZiww1r1G+LZvsmdszDp86TkotUSCqrMbK/ewn0jR1CJmqg==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/shared-internals@3.2.0':
-    resolution: {integrity: sha512-TzLZnwfhhrNkdTVGGyysovvciFCwyxEgMbzF9AZMzNbFlXirhocQSpGjy9V4AQArklu4wDFRYqqe5GMKULGIkw==}
+  '@embroider/shared-internals@3.2.1':
+    resolution: {integrity: sha512-ZHTVF1Md6HiPPdpi5ESU5JlG2m4HRXIVebCka6BoMIfzyPlSjgYmpflv6Cmiq9UUyhe+/3LTMdx53vAV7O9g2Q==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/vite@1.7.15':
-    resolution: {integrity: sha512-lxVYXiwsuhGmvXUcy42EAHes2gL7O7Kg/Cd661vuzfRd/WMMLDsjYgi15ueb16UXrw5lfi3MJMPTypOo1MZELQ==}
+  '@embroider/vite@1.8.0':
+    resolution: {integrity: sha512-+g32mPMqLhrDaXks64dx1tt5jnI5Nbl6EojhJptSNBq3M+HHDS1dj+1kVjNmmpQwl0nId7ToGQZOr+Ykm19kNA==}
     peerDependencies:
       '@babel/core': ^7.22.9 || ^8.0.0
-      '@embroider/core': ^4.6.9
+      '@embroider/core': ^4.6.10
       vite: '>= 5.2.0'
     peerDependenciesMeta:
       '@babel/core':
@@ -5419,10 +5419,6 @@ packages:
     resolution: {integrity: sha512-QU4fa0D6aSOmrT+7OHpUXw+jS84T0MLaQNtFs8xzLNe6Arj44Magd7WEbyVW5LNYoAPVV35aKs4azxIfVJrToQ==}
     deprecated: See https://github.com/lydell/source-map-url#deprecated
 
-  source-map-url@0.4.1:
-    resolution: {integrity: sha512-cPiFOTLUKvJFIg4SKVScy4ilPPW6rFgMgfuZJPNoDuMs3nC1HbMUycBoJw77xFIp6z1UJQJOfx6C9GMH80DiTw==}
-    deprecated: See https://github.com/lydell/source-map-url#deprecated
-
   source-map@0.4.4:
     resolution: {integrity: sha512-Y8nIfcb1s/7DcobUz1yOO1GSp7gyL+D9zLHDehT7iRESqGSxjJ448Sg7rvfgsRJCnKLdSl11uGf0s9X80cH0/A==}
     engines: {node: '>=0.8.0'}
@@ -7671,7 +7667,7 @@ snapshots:
   '@ember/test-waiters@4.1.1(@babel/core@8.0.10)(@glint/template@1.9.0)':
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.21.3(@babel/core@8.0.10)(@glint/template@1.9.0)
+      '@embroider/macros': 1.21.4(@babel/core@8.0.10)(@glint/template@1.9.0)
     transitivePeerDependencies:
       - '@babel/core'
       - '@glint/template'
@@ -7679,21 +7675,21 @@ snapshots:
 
   '@embroider/addon-shim@1.10.2':
     dependencies:
-      '@embroider/shared-internals': 3.2.0
+      '@embroider/shared-internals': 3.2.1
       broccoli-funnel: 3.0.8
       common-ancestor-path: 1.0.1
       semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/core@4.6.9(@glint/template@1.9.0)':
+  '@embroider/core@4.6.10(@glint/template@1.9.0)':
     dependencies:
       '@babel/core': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/traverse': 7.29.7
-      '@embroider/macros': 1.21.3(@babel/core@7.29.7)(@glint/template@1.9.0)
+      '@embroider/macros': 1.21.4(@babel/core@7.29.7)(@glint/template@1.9.0)
       '@embroider/reverse-exports': 0.2.0
-      '@embroider/shared-internals': 3.2.0
+      '@embroider/shared-internals': 3.2.1
       assert-never: 1.4.0
       babel-plugin-ember-template-compilation: 3.1.0
       broccoli-node-api: 1.7.0
@@ -7722,9 +7718,9 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/macros@1.21.3(@babel/core@7.29.7)(@glint/template@1.9.0)':
+  '@embroider/macros@1.21.4(@babel/core@7.29.7)(@glint/template@1.9.0)':
     dependencies:
-      '@embroider/shared-internals': 3.2.0
+      '@embroider/shared-internals': 3.2.1
       assert-never: 1.4.0
       babel-import-util: 3.0.1
       ember-cli-babel: 8.3.1(@babel/core@7.29.7)
@@ -7738,9 +7734,9 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@embroider/macros@1.21.3(@babel/core@8.0.10)(@glint/template@1.9.0)':
+  '@embroider/macros@1.21.4(@babel/core@8.0.10)(@glint/template@1.9.0)':
     dependencies:
-      '@embroider/shared-internals': 3.2.0
+      '@embroider/shared-internals': 3.2.1
       assert-never: 1.4.0
       babel-import-util: 3.0.1
       ember-cli-babel: 8.3.1(@babel/core@8.0.10)
@@ -7759,7 +7755,7 @@ snapshots:
       mem: 8.1.1
       resolve.exports: 2.0.3
 
-  '@embroider/shared-internals@3.2.0':
+  '@embroider/shared-internals@3.2.1':
     dependencies:
       babel-import-util: 3.0.1
       debug: 4.4.3
@@ -7777,10 +7773,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/vite@1.7.15(@babel/core@7.29.7)(@embroider/core@4.6.9(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.33.0)(terser@5.43.1)(yaml@2.9.0))':
+  '@embroider/vite@1.8.0(@babel/core@7.29.7)(@embroider/core@4.6.10(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.33.0)(terser@5.43.1)(yaml@2.9.0))':
     dependencies:
-      '@embroider/core': 4.6.9(@glint/template@1.9.0)
-      '@embroider/macros': 1.21.3(@babel/core@7.29.7)(@glint/template@1.9.0)
+      '@embroider/core': 4.6.10(@glint/template@1.9.0)
+      '@embroider/macros': 1.21.4(@babel/core@7.29.7)(@glint/template@1.9.0)
       '@embroider/reverse-exports': 0.2.0
       assert-never: 1.4.0
       browserslist: 4.28.1
@@ -7792,7 +7788,6 @@ snapshots:
       fs-extra: 10.1.0
       jsdom: 25.0.1
       send: 1.2.1
-      source-map-url: 0.4.1
       terser: 5.43.1
       vite: 7.3.1(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.33.0)(terser@5.43.1)(yaml@2.9.0)
     optionalDependencies:
@@ -7804,10 +7799,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/vite@1.7.15(@babel/core@8.0.10)(@embroider/core@4.6.9(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@8.3.5(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.9.0))':
+  '@embroider/vite@1.8.0(@babel/core@8.0.10)(@embroider/core@4.6.10(@glint/template@1.9.0))(@glint/template@1.9.0)(vite@8.3.5(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.9.0))':
     dependencies:
-      '@embroider/core': 4.6.9(@glint/template@1.9.0)
-      '@embroider/macros': 1.21.3(@babel/core@8.0.10)(@glint/template@1.9.0)
+      '@embroider/core': 4.6.10(@glint/template@1.9.0)
+      '@embroider/macros': 1.21.4(@babel/core@8.0.10)(@glint/template@1.9.0)
       '@embroider/reverse-exports': 0.2.0
       assert-never: 1.4.0
       browserslist: 4.28.1
@@ -7819,7 +7814,6 @@ snapshots:
       fs-extra: 10.1.0
       jsdom: 25.0.1
       send: 1.2.1
-      source-map-url: 0.4.1
       terser: 5.43.1
       vite: 8.3.5(@types/node@24.3.0)(esbuild@0.27.1)(jiti@2.5.1)(terser@5.43.1)(yaml@2.9.0)
     optionalDependencies:
@@ -10513,7 +10507,7 @@ snapshots:
   ember-resources@7.0.6(@babel/core@8.0.10)(@glimmer/component@2.0.0)(@glint/template@1.9.0):
     dependencies:
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.21.3(@babel/core@8.0.10)(@glint/template@1.9.0)
+      '@embroider/macros': 1.21.4(@babel/core@8.0.10)(@glint/template@1.9.0)
       '@glint/template': 1.9.0
     optionalDependencies:
       '@glimmer/component': 2.0.0
@@ -12986,8 +12980,6 @@ snapshots:
       source-map: 0.6.1
 
   source-map-url@0.3.0: {}
-
-  source-map-url@0.4.1: {}
 
   source-map@0.4.4:
     dependencies:
