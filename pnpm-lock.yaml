@@ -307,8 +307,8 @@ importers:
         specifier: ^22.1.0
         version: 22.1.0
       testem:
-        specifier: ^3.21.3
-        version: 3.21.3(@babel/core@8.0.10)(handlebars@4.7.8)(underscore@1.13.7)
+        specifier: ^3.21.5
+        version: 3.21.5(@babel/core@8.0.10)(handlebars@4.7.8)(underscore@1.13.7)
       tsdown:
         specifier: ^0.23.2
         version: 0.23.4(@volar/typescript@2.4.28)(typescript@5.9.3)(unrun@0.2.37(synckit@0.11.11))
@@ -5544,8 +5544,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  testem@3.21.3:
-    resolution: {integrity: sha512-vZTaZajvrWjRnImBGGrkdFlGNqM9Llg9xdvYL7Yrb2BSzIjlZjV+7pc3FJTgagNgJaNsatp4s/Wtam5MSQrFvg==}
+  testem@3.21.5:
+    resolution: {integrity: sha512-HvQM6RYYBGNmg+PSrK6x/SKeJVpp8z6zgEdi9VkBA9kfE7M7XSbF9h16QLycA3TntWr/bDS1iuasZdtz1qh9+g==}
     engines: {node: ^20.19.0 || ^22.12.0 || ^24.0.0 || >= 26.0.0}
     hasBin: true
 
@@ -6157,18 +6157,22 @@ packages:
   yuku-ast@0.19.0:
     resolution: {integrity: sha512-PyCsiScaelhxBGzL8dyeJkLqvRZycoh78R31Vrt/WqYrm0hMFoKwIw/X7Dx5mBKLWAMlV9I9HEyBOHnj2gZVyw==}
     engines: {node: '>=14.18.0'}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku-codegen@0.19.0:
     resolution: {integrity: sha512-uymAKHjDuaP4BEpkXC/BSLz4DUEF5oArZ5AuD3888nb2miChjWSgpPdojEJxm3pjpXkgUaCRJQyNAbnMN33wHg==}
     engines: {node: '>=14.18.0'}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku-core@0.19.0:
     resolution: {integrity: sha512-kYK9e1XdfirNhkipzW0wmMcSWcVF/CWnuugodfVYRCUwvoBefweL9HzB96OiKEhsx78V5WbUxbJqlizMX869Qg==}
     engines: {node: '>=14.18.0'}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
   yuku-parser@0.19.0:
     resolution: {integrity: sha512-XrBh9ZiQK5mJVRxZBAvD6LwRyAYrK3MFtH3+onyuxFL5hFD44EC3QOmIC1FjTj6H2MMwq46/NAI+NZxLZPZgxg==}
     engines: {node: '>=14.18.0'}
+    deprecated: 'Yuku is now one package with one core. Use "yuku" instead: https://yuku.fyi/javascript/. Existing installs keep working but get no more fixes.'
 
 snapshots:
 
@@ -13095,7 +13099,7 @@ snapshots:
       commander: 2.20.3
       source-map-support: 0.5.21
 
-  testem@3.21.3(@babel/core@8.0.10)(handlebars@4.7.8)(underscore@1.13.7):
+  testem@3.21.5(@babel/core@8.0.10)(handlebars@4.7.8)(underscore@1.13.7):
     dependencies:
       '@xmldom/xmldom': 0.9.9
       backbone: 1.6.1
