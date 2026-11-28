@@ -51,9 +51,9 @@
     "ember-resources": "^7.0.6"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.9",
-    "@babel/plugin-transform-typescript": "^8.0.6",
-    "@babel/runtime": "^8.0.8",
+    "@babel/core": "^8.1.3",
+    "@babel/plugin-transform-typescript": "^8.1.3",
+    "@babel/runtime": "^8.1.3",
     "@ember/app-tsconfig": "^2.1.0",
     "@ember/test-helpers": "^5.8.0",
     "@embroider/core": "^4.6.10",
